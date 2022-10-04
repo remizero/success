@@ -1,0 +1,47 @@
+- Para 
+
+- Para ejecutar desde setup.py
+- [] TODO https://www.analyticslane.com/2020/03/20/gestionar-las-dependencias-de-paquetes-python-creacion-de-paquetes-de-python-5a-parte/
+
+- Para ejecutar desde Docker.
+  - Abrir un terminal, consola o powershell, ubicarse en la carpeta raiz del
+    proyecto y ejecutar el archivo docker-compose.yml.
+
+      docker-compose up -d (para ejecutar en segundo plano y seguir trabajando).
+
+- Para ejecutar en entorno virtual de python de forma manual.
+  - Se crea el entorno virtual de python.
+
+      python3 -m venv venv (este ultimo puede llamarse como queramos)
+
+  - Se activa el entorno virtual de python.
+
+      source venv/bin/activate (Para Linux o mac-OS)
+      venv\Scripts\activate.bat (Para Windows CMD)
+      venv\Scripts\activate.ps (Para Windows powershell)
+
+  - Se instalan los requerimientos.
+
+      pip3 install -r requirements.txt
+
+    - Para instalar paquetes individuales.
+        pip3 install paquete o pip3 install paquete==x.x.x
+    - Para actualizar un paquete instalado.
+        pip3 install --upgrade paquete
+    - Para desinstalar paquetes individuales.
+        pip3 unistall paquete
+    - Para listar paquetes instalados.
+        pip3 freeze o pip3 list
+    - Para crear un archivo de requerimientos.
+        pip3 freeze > requirements.txt
+    - Para mostrar informacion de un paquete instalado.
+        pip3 show paquete
+
+- Para ejecutar en entorno virtual de python de forma automatizada.
+  - Ejecutar el archivo run.sh, run.bat o run.ps1
+    - Linux o mac-OS
+        ./run.sh
+    - Windows CMD
+        run.bat
+    - Windows powershell
+        run.ps1

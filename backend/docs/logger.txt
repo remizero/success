@@ -1,0 +1,24 @@
+Explicar todas las directivas.
+LOGGER_BACKUP_COUNT = 5
+LOGGER_DIR = './log/error.log'
+LOGGER_FORMAT = f"%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s - %(threadName)s"
+LOGGER_MAX_BYTES = 1000000
+LOGGER_MESSAGE_SUBJECT = 'Alerta critica en el sistema'
+LOGGER_TEMPLATE_FORMAT_MESSAGE = 
+LOGGER_TEMPLATE_HTML_ERROR = 'SuccessErrorAlert.html'
+LOGGER_TEMPLATE_HTML_EXCEPTION = 'SuccessExceptionAlert.html'
+LOGGER_MAIL_SERVER = 'smtp.gmail.com'
+LOGGER_MAIL_PORT = 587
+LOGGER_MAIL_TLS = True
+LOGGER_MAIL_SSL = False
+LOGGER_MAIL_USERNAME = 'filizaa@gmail.com'
+LOGGER_MAIL_PASSWORD = 'Gm13557244.*'
+LOGGER_ADMIN = 'filizaa@gmail.com'
+
+Todas las excepciones estan deshabilitadas dentro del subsistema logger en modo
+"produccion" y "staging", garantizando que el sistema no colapsara durante la
+ejecucion de estos modos.
+
+El sistema logger guarda todas las excepciones y errores en formato json.
+El sistema logger posee un visor de log para visualizar facilmente las incidencias
+ocurridas.

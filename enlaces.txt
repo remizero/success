@@ -1,0 +1,126 @@
+Leer variables de entorno
+https://prettyprinted-com.translate.goog/tutorials/automatically_load_environment_variables_in_flask?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es-419&_x_tr_pto=sc
+
+
+Manejo de archivos y directorios
+https://data-flair.training/blogs/python-directory
+https://github.com/miguelgrinberg/microblog
+
+
+Envio de email y como organizar el codigo, muy interesante la utilizacion de los archivos __init__.py
+https://github.com/miguelgrinberg/microblog
+https://pythones.net/enviar-email-desde-flask/
+https://pythonbasics.org/flask-mail/
+https://j2logo.com/tutorial-flask-leccion-14-enviar-emails-con-flask
+https://pythonhosted.org/Flask-Mail/
+
+
+cookies y jwt
+https://www.autoscripts.net/store-tokens-in-browser-cookies-with-flask-jwt-extended/
+https://www.geeksforgeeks.org/using-jwt-for-user-authentication-in-flask/
+https://github.com/obikastanya/restfulapi-with-flask-sql-alchemy-and-jwt/blob/master/application/user/userController.py
+https://obikastanya.medium.com/create-completed-restfull-api-with-flask-sql-alchemy-and-jwt-as-authenticator-4edd3f8f26b7
+https://testdriven.io/blog/flask-spa-auth/
+https://stackoverflow.com/questions/61720225/unable-to-set-cookies-in-chrome-using-flask-jwt-extended-react-and-axios
+https://www.arundhaj.com/blog/definitive-guide-to-solve-cors-access-control-allow-origin-python-flask.html
+https://stackoverflow.com/questions/34558264/fetch-api-with-cookie
+https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+https://stackoverflow.com/questions/63228258/can-javascript-react-send-httponly-cookie-to-server
+https://stackoverflow.com/questions/68970499/how-to-get-http-only-cookie-in-react
+http://www.redotheweb.com/2015/11/09/api-security.html
+https://github.com/manosriram-youtube/jwt-auth/blob/master/client/src/App.js
+
+
+convertir consultas sqlalchemy en json
+https://www.google.com/search?client=opera&q=how+to+return+json+from+sqlalchemy&sourceid=opera&ie=UTF-8&oe=UTF-8
+https://stackoverflow.com/questions/19110164/dumping-sqlalchemy-output-to-json
+https://codeandlife.com/2014/12/07/sqlalchemy-results-to-json-the-easy-way/
+https://www.maskaravivek.com/post/how-to-serialize-flask-sqlalchemy-to-json/
+https://www.google.com/search?client=opera&q=flask-SQLAlchemy-serializer&sourceid=opera&ie=UTF-8&oe=UTF-8
+https://pypi.org/project/SQLAlchemy-serializer/
+https://docs.sqlalchemy.org/en/14/core/serializer.html
+
+
+gitignore
+https://git-scm.com/docs/gitignore
+https://www.atlassian.com/es/git/tutorials/saving-changes/gitignore
+https://www.google.com/search?q=gitignore&client=opera&ei=00IGY7aUIO7hkvQPvb6CGA&oq=gitig&gs_lcp=Cgdnd3Mtd2l6EAMYADIECAAQQzIECAAQQzIECAAQQzIECAAQQzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgoILhDHARDRAxBDOhQILhCABBCxAxCDARDHARDRAxDUAjoLCAAQgAQQsQMQgwE6CAgAELEDEIMBOhAILhCxAxCDARDHARDRAxBDOgcIABCxAxBDOgoIABCxAxCDARBDOgsILhCABBDHARDRA0oECEEYAEoECEYYAFAAWNYPYORcaABwAXgAgAHzAogBmQuSAQcwLjEuMS4zmAEAoAEBwAEB&sclient=gws-wiz
+
+
+
+dockerizar proyecto reactjs
+https://www.google.com/search?q=dockerizar+proyecto+react&client=opera&biw=1880&bih=962&ei=G6MYY9K3Hd-SwbkP9MGgyA4&ved=0ahUKEwiSscj26oL6AhVfSTABHfQgCOk4ChDh1QMIDQ&uact=5&oq=dockerizar+proyecto+react&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEKIEMgUIABCiBDIFCAAQogQ6BwgAEB4QogRKBAhBGABKBAhGGABQAFi0F2CVKGgAcAF4AYAB_AuIAfJGkgEJNS0zLjQuMi4xmAEAoAEBwAEB&sclient=gws-wiz
+https://programmerclick.com/article/43491334852/
+
+
+token
+https://codehunter.cc/a/reactjs/how-to-use-redux-to-refresh-jwt-token
+https://ahorasomos.izertis.com/solidgear/refresh-token-autenticacion-jwt-implementacion-nodejs/
+https://stackoverflow.com/questions/67048767/throwing-error-for-flask-jwt-extended-refresh-token
+https://dev.to/nagatodev/how-to-add-login-authentication-to-a-flask-and-react-application-23i7
+https://www.google.com/search?q=how+to+refresh+jwt+token+flask+%2B+react+js&client=opera&ei=UQEEY4uCBZLMwbkPmp2OuAw&start=10&sa=N&ved=2ahUKEwjL7t3ovdv5AhUSZjABHZqOA8cQ8NMDegQIARBO&biw=1880&bih=962&dpr=1
+
+https://github.com/vimalloc/flask-jwt-extended/issues/239
+https://medium.com/@riken.mehta/full-stack-tutorial-3-flask-jwt-e759d2ee5727
+https://medium.com/@riken.mehta/full-stack-tutorial-3-flask-jwt-e759d2ee5727
+https://programtalk.com/vs2/?source=python/13731/flask-jwt-extended/examples/csrf_protection_with_cookies.py
+https://github.com/vimalloc/flask-jwt-extended/blob/master/examples/blocklist_database.py
+https://www.google.com/search?client=opera&q=how+to+use+refresh+token+flask&sourceid=opera&ie=UTF-8&oe=UTF-8
+https://flask--jwt--extended-readthedocs-io.translate.goog/en/stable/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=sc
+https://flask--jwt--extended-readthedocs-io.translate.goog/en/stable/refreshing_tokens/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=sc
+https://flask--jwt--extended-readthedocs-io.translate.goog/en/stable/blocklist_and_token_revoking/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=sc#revoking-refresh-tokens
+https://blog.teclado.com/jwt-authentication-and-token-refreshing-in-rest-apis/
+https://flask-jwt-extended.readthedocs.io/en/stable/refreshing_tokens/
+https://flask.palletsprojects.com/en/2.2.x/security/
+
+
+Flask-admin
+https://github.com/mjurenka/flask-admin
+
+
+Proyectos y/o tutoriales que pueden ayudar
+https://github.com/j2logo/tutorial-flask
+https://blog.miguelgrinberg.com/post/how-to-create-a-react--flask-project
+https://github.com/pallets/flask/tree/main/examples/tutorial
+
+
+
+
+
+
+
+************* BUENAS PRACTICAS PARA DESARROLLAR APLICACIONES FLASK ************
+IMPORTANTE
+https://plataforma.josedomingo.org/pledin/cursos/flask/curso/u09/
+https://cosasdedevs.com/posts/consejos-crear-api-rest/
+
+
+
+***** CONFIGURACION VARIABLES DE ENTORNO FLASK
+https://flask.palletsprojects.com/en/latest/config/
+https://j2logo.com/tutorial-flask-leccion-7-parametros-de-configuracion-proyecto/
+
+
+
+***** CONFIGURACION CORS
+https://flask-cors.readthedocs.io/en/latest/
+https://www.arundhaj.com/blog/definitive-guide-to-solve-cors-access-control-allow-origin-python-flask.html
+http://www.redotheweb.com/2015/11/09/api-security.html (Para seguridad XSS y CSRF)
+http://stackoverflow.com/a/37396572/272689.
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+
+
+
+***** IMPORTAR MODULOS O PAQUETES DINAMICAMENTE
+https://www.blog.pythonlibrary.org/2012/07/31/advanced-python-how-to-dynamically-load-modules-or-classes/
+https://www.geeksforgeeks.org/how-to-dynamically-load-modules-or-classes-in-python/
+https://julienharbulot.com/python-dynamical-import.html
+https://joeray.me/dynamically-load-classes-from-module-python
+https://docs.python.org/es/3/library/importlib.html#importlib.import_module
+https://docs.python.org/es/3/library/functions.html#import__
+https://docs.python.org/es/3/reference/import.html
+https://es.acervolima.com/como-cargar-modulos-o-clases-dinamicamente-en-python/
+
+
+
+

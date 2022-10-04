@@ -1,0 +1,84 @@
+PARA DOCUMENTAR ESTA SECCION DEL SISTEMA
+https://flask-cors.readthedocs.io/en/latest/configuration.html#cors-origins-setting
+
+Las siguientes variables de entorno, se ham definido con la finalidad de 
+flexibilizar la creacion de recursos entorno a proyectos de gran alcance,
+cuando se quiere tener un mayor control de los recursos prestados y a su
+vez para separar los endpoints, para que tengan acceso solo uno o varios
+dominios específicos a un grupo de endpoints y otro grupo de estos ultimos
+solo sean accesibles a otro grupo de dominios o uno en especifico.
+Tener en cuenta que estas variables de entorno tendran prioridad sobre las
+variables propias de la extension CORS de FLASK, una configuracion inadecuada
+hara que la aplicacion se comporte de forma impredecible, sin contar con los
+problemas de seguridad asociados a los sistemas basados en cross-domain.
+
+La extension Cors ya viene con una configuracion predefinida para que pueda
+trabajar sin problemas al momento del desarrollo, pero se recomienda cambiar
+las configuraciones basicas al momento de desplegar su sistema en un entorno
+de produccion.
+
+NOTA: Las variables de entorno CORS_RESOURCES_APP_RESOURCES, CORS_RESOURCES_APP_ORIGINS,
+CORS_RESOURCES_APP_METHODS, CORS_RESOURCES_APP_ALLOW_HEADERS y
+CORS_RESOURCES_APP_EXPOSE_HEADERS sobre escriben las variables de entorno
+originales de la extension CORS CORS_RESOURCES, CORS_ORIGINS, CORS CORS_METHODS, 
+CORS_ALLOW_HEADERS y CORS_EXPOSE_HEADERS respectivamente, por lo que se hace
+especial enfasis en controlar muy bien este aspecto de configuracion, dado que
+la aplicacion puede comportarse de forma indevida y no reconocer alguna 
+comfiguracion previa en estas variables de entorno. La razon de existir de estas
+variables de entorno adicionales, es para permitir generar distintos recursos
+con sus configuraciones propias de forma conveniente para distintas apis.
+
+Mas adelante hay un ejemplo completo de como hacer una configuracion profesional
+para entornos de produccion incluyendo la asignacion de recursos para diferentes
+dominios.
+
+Al hacer uso de estas variables de entorno, debe configurar 
+CORS_SUPPORTS_CREDENTIALS = True 
+
+CORS_RESOURCES_APP ( list )
+  Representa un dict con los diferentes recursos de la aplicacion.
+  Un recurso esta asociado a una api y su estructura es de la siguiente forma:
+  [ r'api_1', ..., r'api_n' ]
+
+
+CORS_RESOURCES_APP_ORIGINS ( list ( list ) )
+  Los orígenes desde los que se permitirán las solicitudes. Un origen configurado
+  aquí que coincida con el valor del encabezado Origin en una solicitud OPTIONS 
+  de verificación previa se devuelve como el valor del encabezado de respuesta 
+  Access-Control-Allow-Origin.
+  Esta variable de entorno no tendra efecto si CORS_RESOURCES_APP esta configurada
+  en Nulo, en blanco, se deja de configurar o es eliminada del archivo .env.
+  [ [ 'dominio_1', ..., 'dominio_n' ], [ 'dominio_1', ..., 'dominio_n' ], [ 'dominio_1', ..., 'dominio_n' ], [ 'dominio_1', ..., 'dominio_n' ] ]
+
+
+CORS_RESOURCES_APP_METHODS ( list ( list ) )
+  Los métodos a los que pueden acceder los orígenes permitidos. Estos se incluyen
+  en los encabezados de respuesta Access-Control-Allow-Methods a las solicitudes
+  de OPCIONES de verificación previa.
+  Esta variable de entorno no tendra efecto si CORS_RESOURCES_APP esta configurada
+  en Nulo, en blanco, se deja de configurar o es eliminada del archivo .env.
+  [ [ 'GET', 'POST', ... ], [ 'GET', 'POST', ... ], [ 'GET', 'POST', ... ], [ 'GET', 'POST', ... ] ]
+
+
+CORS_RESOURCES_APP_ALLOW_HEADERS ( list ( list ) )
+  Cabeceras a aceptar del cliente. Los encabezados en el encabezado de solicitud
+  Access-Control-Request-Headers (generalmente parte de la solicitud de OPCIONES
+  de verificación previa) los encabezados de combinación en esta lista se
+  incluirán en el encabezado de respuesta Access-Control-Allow-Headers.
+  Las headers permitidas, son las mismas permitidas en la variable de entorno
+  CORS_ALLOW_HEADERS.
+  Esta variable de entorno no tendra efecto si CORS_RESOURCES_APP esta configurada
+  en Nulo, en blanco, se deja de configurar o es eliminada del archivo .env.
+  [ [ 'Content-Type', ... ], [ 'Content-Type', ... ], [ 'Content-Type', ... ], [ 'Content-Type', ... ] ]
+
+
+CORS_RESOURCES_APP_EXPOSE_HEADERS ( list ( list ) )
+  La especificación CORS requiere que el servidor otorgue permisos explícitos
+  para que el cliente lea los encabezados en las respuestas CORS (a través del
+  encabezado Access-Control-Expose-Headers). Esto especifica los encabezados
+  que se incluirán en este encabezado.
+  Las headers permitidas, son las mismas permitidas en la variable de entorno
+  CORS_EXPOSE_HEADERS.
+  Esta variable de entorno no tendra efecto si CORS_RESOURCES_APP esta configurada
+  en Nulo, en blanco, se deja de configurar o es eliminada del archivo .env.
+  [ [ 'Content-Type', ... ], [ 'Content-Type', ... ], [ 'Content-Type', ... ], [ 'Content-Type', ... ] ]

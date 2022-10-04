@@ -1,0 +1,100 @@
+Que es success?
+  Success es un API-RESTFUL basado en FLASK, diseñado para servir diferentes
+  dominios, facilmente configurable. Cuenta con un sistema de administracion
+  y generacion de codigo lo que permite agilizar los tiempos de desarrollo y
+  reducir errores al programar.
+Como obtenerlo?
+Como instalarlo?
+Como ejecutarlo?
+  Existen diferentes formas de ejecutar la aplicacion.
+Estructura
+  DE LOS DIRECTORIOS
+  DE LOS ARCHIVOS
+  Describir la estructura de archivos y directorios del sistema.
+  DE LA IDENTACION
+    Se utiliza identacion simple a dos(2) espacios.
+  DE LAS CONVENCIONES
+    Success utiliza una convencion muy particular y diferente a la convencion
+    de Python y su comunidad. En lo particular la convencion aplicada en el
+    sistema Success proviene de la experiencia y el haber trabajado en otros
+    proyectos en otros lenguajes.
+    Explicar cada modificacion a las convenciones.
+  DE LA CODIFICACION
+    Todos los archivos estan codificados en UTF-8.
+  DE LAS CLASES
+    Todas las clases estan definidas en un archivo propio, por lo que encontrara
+    una clase por archivo.
+  DE LOS ATRIBUTOS
+    Todos los atributos de clases, estan ordenados alfabeticamente y definidos
+    inmediatamente posterior a la definicion de clase. Los atributos de clases que
+    tienen el prefijo "_" o "__" estan ordenados primero que los demas atributos
+    de clase y posterior a la definicion de clase, tambien estan ordenados
+    alfabeticamente.
+    Los atributos esta tipados para identificar el tipo de dato representa cada
+    uno.
+  DE LOS METODOS
+    Todos los metodos de clases, estan ordenados alfabeticamente. Los metodos de
+    clases que tienen el prefijo "_" o "__" estan ordenados primero que los demas
+    metodos de clase y posterior al constructor __init__, tambien estan ordenados
+    alfabeticamente.
+    Todos los metodos estan tipados, esto con la finalidad de identificar el tipo
+    de dato que retornara dicho metodo.
+  DE LOS PARAMETROS
+    Los parametros esta tipados para identificar el tipo de dato que puede recibir
+    cada metodo y como una forma de validacion simple.
+  DE LOS MODELOS
+    Al trabajar con Success, debe tener en cuenta que trabaja con un sistema de 
+    modelo de datos propio y que es el utilizado en el subsistema de generacion
+    automatica de codigo que permite crear modelos en segundos, evitando errores
+    al escribir manualmente las clases modelos.
+    Los modelos generados, heredan de la clase base "Model" contenida en 
+    success/kernel/. Esta clase base predefine cuatro (4) atributos para todos
+    los modelos, por lo que ha de tener en cuenta que al momento de crear su 
+    base de datos, cada tabla debe incluir estos mismos atributos.
+    Adicionalmente, los modelos trabajan de la siguiente forma:
+      - El funcionamiento del modelo hace uso de los nombres de tablas en base
+        de datos en plural, y la definicion de clase del modelo en singular,
+        es decir, si en la base de datos existe una tabla que se llama users,
+        la clase del modelo se llamara User. Esto solo para mantener las
+        convenciones de base de datos.
+    Para resolver este inconveniente que podria suponer para usted, existen dos
+    (2) formas de hacerlo.
+      1-. Modificar la clase base "Model" y eliminar estos atributos y/o agregar
+          los que usted requiera en todas sus tablas sin riesgo de fallo.
+      2-. Crear sus modelos manualmente sin heredar de la clase "Model" sin
+          riesgo de fallo.
+Como funciona?
+Como funciona internamente?
+Conceptos de success
+  App
+  Api
+  Modulos
+  Endpoints
+  Recurso cors => Api
+  Recurso http => Endpoint
+  kernel
+  Extensiones
+  instance
+La Api admin
+  Habilitar la Api admin
+  Deshabilitar la Api admin
+  El modulo crear nuevo Proyecto
+  El modulo crear nueva Api
+  El modulo crear nuevo Modulo
+  El modulo crear nuevo Endpoint
+El modulo auth
+  permisos
+  usuarios
+  perfiles
+Colaboraciones y Agradecimientos
+  Sistema Logger
+    El sistema Logger SuccessLogger, esta basado enteramente en el codigo de 
+    Alexandra Zaharia, con algunas modificaciones para que se ajustara a los
+    requerimientos del sistema Success. El codigo original de SuccessLogger
+    lo pueden encontrar en la siguiente direccion:
+    https://github.com/alexandra-zaharia/python-playground/tree/main/custom_logger_console_and_or_file
+
+    y la direccion del blog, donde encontraras informacion muy interesante
+    https://alexandra-zaharia.github.io/
+
+Creditos

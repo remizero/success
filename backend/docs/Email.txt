@@ -1,0 +1,42 @@
+PARA DOCUMENTAR ESTA SECCION DEL SISTEMA
+https://pythonhosted.org/Flask-Mail/
+
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 587
+MAIL_USE_TLS = True
+MAIL_USE_SSL = False
+MAIL_DEBUG = False
+MAIL_USERNAME = 'filizaa@gmail.com'
+MAIL_PASSWORD = 'Gm13557244.*'
+MAIL_DEFAULT_SENDER = ['filizaa@gmail.com']
+  Puede ser una lista de correos
+MAIL_MAX_EMAILS = 1
+#MAIL_SUPPRESS_SEND = 
+MAIL_ASCII_ATTACHMENTS = False
+# ---------------------------------------------------------
+# Mail Opcional Configuration / Configuración Opcional Mail
+# ---------------------------------------------------------
+MAIL_DONT_REPLY_FROM_EMAIL = '(noReply@gmail.com, filizaa@gmail.com)'
+MAIL_ADMINS = ['filizaa@gmail.com']
+  Puede ser una lista de correos, debe hacer la configuración pertinente para
+  utilizar a conveniencia esta variable de entorno. Lo puede hacer en el metodo
+  config de la clase Email y se ejecutara de forma automatica al momento de la 
+  configuración de la extensión
+
+
+    # :param subject: email subject header
+    # :param recipients: list of email addresses
+    # :param body: plain text message
+    # :param html: HTML message
+    # :param sender: email sender address, or **MAIL_DEFAULT_SENDER** by default
+    # :param cc: CC list
+    # :param bcc: BCC list
+    # :param attachments: list of Attachment instances
+    # :param reply_to: reply-to address
+    # :param date: send date
+    # :param charset: message character set
+    # :param extra_headers: A dictionary of additional headers for the message
+    # :param mail_options: A list of ESMTP options to be used in MAIL FROM command
+    # :param rcpt_options: A list of ESMTP options to be used in RCPT commands
+    # :param template_name_or_list: The name of the template to render. If a list is given, the first name to exist will be rendered.
+    # :param context: The variables to make available in the template.

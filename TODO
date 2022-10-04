@@ -1,0 +1,53 @@
+- [ ] Clave principal de pgadmin4 es 13557244.
+- [ ] Mecanismo que permita cargar configuraciones adicionales a modo que se 
+      ajusten a las reglas del negocio particulares de cada nuevo proyecto.
+      Una idea de esto, es crear un objeto llamado Business, que inicialmente
+      existira para cada uno de los servicios, donde se pueda agregar cualquier
+      clase de configuraciones particulares para esos servicios y seran ejecutados
+      y cargados desde el metodo config de cada servicio. Como extenderlo a otros
+      modulos o clases.
+- [ ] Terminar el manejo del token.
+- [ ] Misma estructura para todas las respuestas(response).
+- [ ] Usar un estándar.
+- [ ] Documentar el codigo.
+- [ ] Test unitarios.
+- [ ] Logging de errores.
+- [ ] Controlar que errores le envías al usuario.
+- [ ] Utilizar los métodos de petición correctos.
+- [ ] Devolver el código de estado correcto.
+- [ ] Separar tu API en versiones.
+- [ ] Generacion de rutas dinamicas.
+- [ ] Instanciacion dinamica de clases desde un string.
+- [ ] Crear un log de registro de que todas las acciones iniciales de creacion 
+      de la aplicacion se ejecutaron correctamente.
+- [ ] Muy importante para documentar y para la gestion de dependencias.
+      https://www.analyticslane.com/2020/03/27/documentar-paquetes-de-python-creacion-de-paquetes-de-python-6a-parte/
+      https://pywombat.com/articles/docstring-python
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
