@@ -10,6 +10,7 @@ from kernel import Response
 
 
 class App ( Flask ) :
-  response_class = Response
+  pass
+  #response_class = Response
   #def __init__ ( self ) :
   #  self.response_class = Response

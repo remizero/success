@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 
 
 # Application Libraries / Librerías de la Aplicación
-from utils import Strings
+from . import Strings
 
 
 # Preconditions / Precondiciones

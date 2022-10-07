@@ -3,8 +3,10 @@
 
 # Application Libraries / Librerías de la Aplicación
 from kernel import Model
-from utils import Fields
-from utils import Relations
+from utils import (
+  Fields,
+  Relations
+)
 
 
 # Preconditions / Precondiciones

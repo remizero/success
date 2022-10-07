@@ -8,10 +8,10 @@ from .Class import Class
 from .Datetime import Datetime
 from .Encryption import Encryption
 from .Http import Http
+from .Strings import Strings
 from .Fields import Fields
 from .File import File
 from .Relations import Relations
-from .Strings import Strings
 from .Structs import Structs
 
 

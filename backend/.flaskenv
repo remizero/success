@@ -1,5 +1,5 @@
 # - Project name.
-# FLASK_APP = 'ApiCoreDev'
+FLASK_APP = 'wsgi:app'
 # - Controls the environment.
 FLASK_ENV = 'development'
 #  - Enables debug mode.

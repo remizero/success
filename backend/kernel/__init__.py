@@ -9,11 +9,11 @@ from .Debug import Debug
 from .Config import Config
 from .LoggerMailer import LoggerMailer
 from .Logger import Logger
-from .App import App
+# from .App import App
 from .Exception import Exception
 from .Extension import Extension
 from .Model import Model
-from .Response import Response
+#from .Response import Response
 from .Validator import Validator
 from extensions import (
   # Blueprint,
@@ -95,7 +95,8 @@ class Success () :
       CREATION OF THE FLASK APPLICATION /
       CREACION DE LAS APLICACION FLASK
     """
-    app = App ( __name__, instance_relative_config = True )
+    #app = App ( __name__, instance_relative_config = True )
+    app = Flask ( __name__, instance_relative_config = True )
     app.config.from_object ( Application.getConfigClass ( config ) )
     app.config.from_pyfile ( Application.getConfigFile (), silent = True )
     email.register ( app )
@@ -106,8 +107,8 @@ class Success () :
      # Al parecer esto no iria aqui, sino en los modulos donde se encuentran los endpoints
     # blueprint.register ( app )
     jwt.register ( app )
-    restful.register ( app )
-    routes.register ( app )
     session.register ( app )
     database.register ( app )
+    routes.register ( app, restful.extension )
+    restful.register ( app )
     return app

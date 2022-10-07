@@ -19,14 +19,15 @@ from exceptions import (
   RequestMethodException
 )
 from extensions import Logger
-from kernel import session
-from models import User
-from utils.Structs import Structs
+from kernel import Debug
+from app.models import User
+#from utils.Structs import Structs
 
-from signin import Validator
+from . import Validator
 from utils import (
   Encryption,
-  Http
+  Http,
+  Structs
 )
 
 
@@ -35,11 +36,9 @@ from utils import (
 
 class Signin ( Resource ) :
 
-  def __init__ ( self ) :
-    pass
-
   def post ( self ) :
-    logger = Logger ( __name__ )
+    Debug.log ( 'ESTA ENTRANDO' )
+    #logger = Logger ( __name__ )
     responseData = ''
     statusResponse = HTTPStatus.BAD_REQUEST
     try :
@@ -60,10 +59,10 @@ class Signin ( Resource ) :
       SchemaError
     ) as exception :
       responseData = { "msg" : exception.getMessage () }
-      logger.log ( exception )
+      #logger.log ( exception )
     except :
       responseData = Structs.jsonModelMsgResponse ( 'Error no identificado, comunicarse inmediatamente con el administrador del sistema.', 'Fatal', statusResponse )
-      logger.uncatchErrorException ()
+      #logger.uncatchErrorException ()
     response = Http.returnResponse ( responseData, statusResponse )
     # if statusResponse == HTTPStatus.OK :
     #   JsonWebToken.create ( response )

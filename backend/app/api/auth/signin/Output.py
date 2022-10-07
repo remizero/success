@@ -2,9 +2,11 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from extensions import Blueprint
+from kernel import Validator as SuccesValidator
 
 
 # Preconditions / Precondiciones
-authBp = Blueprint ( 'auth', __name__, '/auth' )
-#restful.extension.
+
+
+class Output ( SuccesValidator ) :
+  pass

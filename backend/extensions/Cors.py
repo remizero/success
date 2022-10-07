@@ -36,12 +36,14 @@ class Cors ( Extension ) :
     # DO NOT MODIFY (BEGIN) / NO MODIFICAR (INICIO)
     if ( not EnvVar.isEmpty ( 'CORS_RESOURCES_APP_RESOURCES' ) ) :
 
-      self.__resources = EnvVar.getCorsResources ()
+      self.__resources = self.__corsConfigDefault
+      #self.__resources = EnvVar.getCorsResources ()
 
     elif ( not EnvVar.isEmpty ( 'CORS_RESOURCES' ) ) :
 
       # TODO Que hacer aqui
-      pass
+      self.__resources = self.__corsConfigDefault
+      #pass
 
     else :
 
