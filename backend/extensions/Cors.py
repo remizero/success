@@ -1,8 +1,6 @@
 # Python Libraries / Librerías Python
 from flask import Flask
 from flask_cors import CORS
-import ast
-import os
 
 
 # Application Libraries / Librerías de la Aplicación

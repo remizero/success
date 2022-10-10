@@ -1,13 +1,15 @@
 # Python Libraries / Librerías Python
+from flask import Blueprint
+from flask_restful import Api
 
 
 # Application Libraries / Librerías de la Aplicación
-from .Schema import Schema
+from .Input import Input
+from .Output import Output
 from .Signin import Signin
-from .Validator import Validator
-#from extensions import Blueprint
 
 
 # Preconditions / Precondiciones
-#signinBp = Blueprint ( 'signin', __name__, '/signin' )
-#restful.extension.
+signinBp = Blueprint ( 'signin', __name__ )
+restful = Api ( signinBp )
+restful.add_resource ( Signin, '/signin' )

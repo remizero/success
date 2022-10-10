@@ -13,14 +13,13 @@ from kernel import Logger
 class Extension ( ABC ) :
 
   extension = None
-  logger = None
+  logger : Logger = None
 
   def __init__ ( self ) -> None :
     self.logger = Logger ( __name__ )
 
   @abstractmethod
   def config ( self ) -> None :
-
     raise NotImplementedError ()
 
   @abstractmethod

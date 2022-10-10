@@ -2,7 +2,7 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Model
+from common import Model
 from utils import (
   Fields,
   Relations
@@ -20,7 +20,7 @@ class TokenBlacklist ( Model ) :
   user_id = Fields.db_foreign_key ( 'User' )
 
   # Tablas relacionadas
-  users = relator.hasOne ( 'User' )
+  #users = relator.hasOne ( 'User' )
 
   # Constructor
   def __init__ ( self, **kwargs ) :

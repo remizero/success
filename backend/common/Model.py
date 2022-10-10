@@ -1,21 +1,21 @@
 # Python Libraries / Librerías Python
-from flask import current_app
-from flask_sqlalchemy import Model as SqlAlchemyModel
 from sqlalchemy.ext.declarative import declared_attr
 
 
 # Application Libraries / Librerías de la Aplicación
+from extensions import database
 from utils import (
   Datetime,
   Fields,
-  Relations
+  Relations,
+  Strings
 )
 
 
 # Preconditions / Precondiciones
 
 
-class Model ( SqlAlchemyModel ) :
+class Model ( database.extension.Model ) :
 
   __abstract__ = True
   id = Fields.db_primary_key ()
@@ -27,7 +27,7 @@ class Model ( SqlAlchemyModel ) :
   @declared_attr
   def __tablename__ ( cls ) :
     relatorAux = Relations ( cls.__name__ )
-    return relatorAux.pluralName
+    return relatorAux.tableName
 
   def __init__ ( self, **kwargs ) :
     self.inputData ( **kwargs )

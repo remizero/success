@@ -2,7 +2,7 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Model
+from common import Model
 from utils import (
   Fields,
   Relations
@@ -19,8 +19,8 @@ class User ( Model ) :
   username = Fields.db_string ( 50 )
   password = Fields.db_string ( 255 )
   email = Fields.db_string ( 50 )
-  permision_id = Fields.db_integer ()
-  profile_id = Fields.db_integer ()
+  #permision_id = Fields.db_integer ()
+  #profile_id = Fields.db_integer ()
 
   # Related tables / Tablas relacionadas
   # users = relator.hasOne ( 'User' )

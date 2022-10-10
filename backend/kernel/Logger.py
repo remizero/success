@@ -217,5 +217,6 @@ class Logger () :
     self.__loggerMailer.emit ( messageRecord )
 
   def uncatchErrorException ( self ) -> None :
-    self.sendException ( 'uncaught exception', CRITICAL, traceback.format_exc () )
+    # TODO Como ajustar traceback.format_exc () al formato de self.sendException
+    #self.sendException ( 'uncaught exception', CRITICAL, traceback.format_exc () )
     self.__logger.error ( 'uncaught exception: %s', traceback.format_exc () )

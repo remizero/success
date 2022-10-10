@@ -3,6 +3,19 @@ Que es success?
   dominios, facilmente configurable. Cuenta con un sistema de administracion
   y generacion de codigo lo que permite agilizar los tiempos de desarrollo y
   reducir errores al programar.
+  Al modo de entender de Success, Success sige los principios de la "Filosofia
+  de Python" de forma bastante rigurosa con un adicional en lo que respecta a
+  las convenciones pues se considera que el documento "PEP 8 – Style Guide for 
+  Python Code" no cumple con las reglas N 6 y 7 de la "Filosofia de Python",
+  por lo que se han agregado espacios y saltos de linea donde probablemente no
+  este acostumbrado. Situacion que no deberia interferir en la codificacion
+  del desarrollador, pues solo tendra que trabajar en los modulos Endpoints
+  que necesita programar.
+  Success trata de seguir de manera muy estricta el regla N 2 de la "Filosofia
+  de Python" "Explícito es mejor que implícito.", por esa razon se ha
+  utilizado el tipado fuerte en casi la totalidad de definiciones de clases,
+  metodos y/o funciones de su codigo, de forma tal, que el desarrollador sepa
+  con claridad que tipo de dato ha de suministrar o recibir.
 Como obtenerlo?
 Como instalarlo?
 Como ejecutarlo?

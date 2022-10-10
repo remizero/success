@@ -229,7 +229,14 @@ class Development ( Default ) :
   # ---------------------------------------------------
   # SqlAlchemy Configuration / Configuración SqlAlchemy
   # ---------------------------------------------------
-  SQLALCHEMY_DATABASE_URI = EnvVar.get ( 'SQLALCHEMY_DATABASE_URI' )
+  SQLALCHEMY_DATABASE_URI = '{driver}://{user}:{pw}@{url}:{port}/{db}'.format (
+      driver = EnvVar.get ( 'SQLALCHEMY_DB_DRIVER' ),
+      user = EnvVar.get ( 'SQLALCHEMY_DB_USER' ),
+      pw = EnvVar.get ( 'SQLALCHEMY_DB_PASSWORD' ),
+      url = EnvVar.get ( 'SQLALCHEMY_DB_HOST' ),
+      port = EnvVar.get ( 'SQLALCHEMY_DB_PORT' ),
+      db = EnvVar.get ( 'SQLALCHEMY_DB_NAME' )
+    )
   SQLALCHEMY_BINDS = EnvVar.get ( 'SQLALCHEMY_BINDS' )
   SQLALCHEMY_ECHO = EnvVar.isTrue ( 'SQLALCHEMY_ECHO' )
   SQLALCHEMY_RECORD_QUERIES = EnvVar.isTrue ( 'SQLALCHEMY_RECORD_QUERIES' )
@@ -245,6 +252,7 @@ class Development ( Default ) :
   SQLALCHEMY_DB_NAME = EnvVar.get ( 'SQLALCHEMY_DB_NAME' )
   SQLALCHEMY_DB_USER = EnvVar.get ( 'SQLALCHEMY_DB_USER' )
   SQLALCHEMY_DB_PASSWORD = EnvVar.get ( 'SQLALCHEMY_DB_PASSWORD' )
+  SQLALCHEMY_TABLENAME_SUCCESS_MODEL = EnvVar.isTrue ( 'SQLALCHEMY_TABLENAME_SUCCESS_MODEL' )
 
 
   # ---------------------------------------

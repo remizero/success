@@ -3,7 +3,10 @@ from sqlalchemy.orm import relationship
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import Strings
+from . import (
+  EnvVar,
+  Strings
+)
 
 
 # Preconditions / Precondiciones
@@ -11,26 +14,31 @@ from . import Strings
 
 class Relations () :
 
-  modelName = ""
-  snakeName = ""
-  pluralName = ""
+  modelName = ''
+  snakeName = ''
+  pluralName = ''
+  tableName = ''
 
   def __init__ ( self, modelName ) :
     self.modelName = modelName
     self.snakeName = Strings.snakeCase ( self.modelName )
     self.pluralName = Strings.toPlural ( self.snakeName )
+    if ( EnvVar.isTrue ( 'SQLALCHEMY_TABLENAME_SUCCESS_MODEL' ) ) :
+      self.tableName = self.snakeName
+    else :
+      self.tableName = self.pluralName
 
   def oneToOne ( self, modelNameToRelate ) :
     return relationship (
       modelNameToRelate,
-      back_populates = self.pluralName,
+      back_populates = self.tableName,
       uselist = False
     )
 
   def oneToMany ( self, modelNameToRelate ) :
     return relationship (
       modelNameToRelate,
-      back_populates = self.pluralName,
+      back_populates = self.tableName,
       lazy = 'dynamic'
     )
 
@@ -38,19 +46,19 @@ class Relations () :
     return relationship (
       modelNameToRelate,
       secondary = Strings.toPlural ( Strings.snakeCase ( secondaryTable ) ),
-      back_populates = self.pluralName,
+      back_populates = self.tableName,
       lazy = 'dynamic'
     )
 
   def hasOne ( self, modelNameToRelate ) :
     return relationship (
       modelNameToRelate,
-      back_populates = self.pluralName
+      back_populates = self.tableName
     )
 
   def hasMany ( self, modelNameToRelate ):
     return relationship (
       modelNameToRelate,
-      back_populates = self.snakeName,
+      back_populates = self.tableName,
       lazy = 'dynamic'
     )
