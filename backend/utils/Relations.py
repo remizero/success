@@ -1,5 +1,8 @@
 # Python Libraries / Librerías Python
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import (
+  relationship,
+  backref
+)
 
 
 # Application Libraries / Librerías de la Aplicación
@@ -61,4 +64,10 @@ class Relations () :
       modelNameToRelate,
       back_populates = self.tableName,
       lazy = 'dynamic'
+    )
+
+  def relationalTable ( self, modelNameToRelate : str ) :
+    return relationship (
+      modelNameToRelate,
+      backref = backref ( self.snakeName, cascade = 'all, delete-orphan' )
     )

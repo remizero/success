@@ -59,7 +59,7 @@ class Default ( Config ) :
   # Se define el dominio sobre el cual se crearan las cookies
   # HABILITAR SOLO PARA MODO DE DESARROLLO EN LOCAL
   JWT_COOKIE_DOMAIN = os.environ.get ( 'JWT_COOKIE_DOMAIN' )
-  # HABILITAR PARA MODO STAGING Y/O PRODUCCION
+  # HABILITAR PARA MODO SUCCESS_STAGING Y/O PRODUCCION
   JWT_COOKIE_DOMAIN = os.environ.get ( 'JWT_COOKIE_DOMAIN' )
   # Set the cookie paths
   JWT_ACCESS_COOKIE_PATH = os.environ.get ( 'JWT_ACCESS_COOKIE_PATH' )

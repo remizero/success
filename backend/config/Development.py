@@ -22,8 +22,8 @@ class Development ( Default ) :
   DEBUG = EnvVar.isTrue ( 'DEBUG' )
   SECRET_KEY = EnvVar.get ( 'SECRET_KEY' )
   API_KEY = EnvVar.get ( 'API_KEY' )
-  STAGING = EnvVar.isTrue ( 'STAGING' )
-  TESTING = EnvVar.isTrue ( 'TESTING' )
+  SUCCESS_STAGING = EnvVar.isTrue ( 'SUCCESS_STAGING' )
+  SUCCESS_TESTING = EnvVar.isTrue ( 'SUCCESS_TESTING' )
 
   # -------------------------------------------------
   # Blueprint Configuration / Configuración Blueprint

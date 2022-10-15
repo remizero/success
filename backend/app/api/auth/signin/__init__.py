@@ -4,12 +4,11 @@ from flask_restful import Api
 
 
 # Application Libraries / Librerías de la Aplicación
-from .Input import Input
-from .Output import Output
-from .Signin import Signin
+from .Endpoint import Endpoint
+from .Schema import Schema
 
 
 # Preconditions / Precondiciones
 signinBp = Blueprint ( 'signin', __name__ )
 restful = Api ( signinBp )
-restful.add_resource ( Signin, '/signin' )
+restful.add_resource ( Endpoint, '/signin' )

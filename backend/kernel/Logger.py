@@ -76,18 +76,20 @@ _srcfile = os.path.normcase ( _srcfile )
 
 class Logger () :
 
-  # Cantidad de archivos log de errores a mantener
+  # Number of error log files to keep. / Cantidad de archivos log de errores a mantener.
   __backupCount = 5
-  # Nombre del archivo log de errores
+  # Error log file name and path. / Nombre y ruta del archivo log de errores.
   __fileName = EnvVar.get ( 'LOGGER_DIR' )
-  # Formato del mensaje que se guardara en el archivo log
+  # Format of the message to save in the log file. / Formato del mensaje a guardar en el archivo log.
   __format = f"%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s - %(threadName)s"
-  # Instancia del logger
+  # Logger object instance. / Instancia del objeto logger.
   __logger : LoggerPython = None
-  # Instancia del LoggerMailer para envio de correo critico y fatal.
+  # LoggerMailer instance for sending critical and fatal mail. / Instancia del LoggerMailer para envío de correo crítico y fatal.
   __loggerMailer : LoggerMailer = None
-  # Tamaño maximo del archivo log de errores
+  # Maximum size of the error log file. / Tamaño máximo del archivo log de errores.
   __maxBytes = 500000
+  # Error to display to the user at the frontend level. / Error a mostrar al usuario a nivel de frontend.
+  __toShow = ''
 
   def __init__ ( self, module : str, level : int = DEBUG ) -> None :
     self.__logger = getLogger ( module )
@@ -165,58 +167,70 @@ class Logger () :
     return rv
 
   def log ( self, errorMessage ) -> None :
+    try :
 
-    if isinstance ( errorMessage, BaseException ) :
+      getattr ( errorMessage, 'getMessage' )
+      self.__toShow = str ( errorMessage.getMessage () )
+      self.__logger.exception ( errorMessage.getMessage () )
 
-      if hasattr ( errorMessage, 'getMessage' ) :
+    except :
 
-        self.__logger.exception ( errorMessage.getMessage () )
+      try :
 
-      else :
-
+        getattr ( errorMessage, 'orig' )
+        self.__toShow = str ( errorMessage.orig )
         self.__logger.error ( errorMessage, exc_info = True )
 
-    elif isinstance ( errorMessage, Exception ) :
+      except :
 
-      if hasattr ( errorMessage, 'getMessage' ) :
+        try :
 
-        self.__logger.exception ( errorMessage.getMessage () )
+          getattr ( errorMessage, 'message' )
+          self.__toShow = str ( errorMessage.message )
+          self.__logger.error ( errorMessage, exc_info = True )
 
-      else :
+        except :
 
-        self.__logger.error ( errorMessage, exc_info = True )
+          self.__toShow = str ( errorMessage.getMessage () )
+          if self.__logger.isEnabledFor ( DEBUG ) :
 
-    elif self.__logger.isEnabledFor ( DEBUG ) :
+            self.__logger.debug ( errorMessage, exc_info = True )
 
-      self.__logger.debug ( errorMessage, exc_info = True )
+          elif self.__logger.isEnabledFor ( INFO ) :
 
-    elif self.__logger.isEnabledFor ( INFO ) :
+            self.__logger.info ( errorMessage, exc_info = True )
 
-      self.__logger.info ( errorMessage, exc_info = True )
+          elif self.__logger.isEnabledFor ( WARNING ) :
 
-    elif self.__logger.isEnabledFor ( WARNING ) :
+            self.__logger.warning ( errorMessage, exc_info = True )
 
-      self.__logger.warning ( errorMessage, exc_info = True )
+          elif self.__logger.isEnabledFor ( ERROR ) :
 
-    elif self.__logger.isEnabledFor ( ERROR ) :
+            self.__logger.error ( errorMessage, exc_info = True )
 
-      self.__logger.error ( errorMessage, exc_info = True )
+          elif self.__logger.isEnabledFor ( CRITICAL ) :
 
-    elif self.__logger.isEnabledFor ( CRITICAL ) :
+            self.sendException ( 'Critical exception', CRITICAL, errorMessage )
+            self.__logger.critical ( errorMessage, exc_info = True )
 
-      self.sendException ( 'Critical exception', CRITICAL, errorMessage )
-      self.__logger.critical ( errorMessage, exc_info = True )
+          elif self.__logger.isEnabledFor ( FATAL ) :
 
-    elif self.__logger.isEnabledFor ( FATAL ) :
+            self.sendException ( 'Fatal exception', FATAL, errorMessage )
+            self.__logger.fatal ( errorMessage, exc_info = True )
 
-      self.sendException ( 'Fatal exception', CRITICAL, errorMessage )
-      self.__logger.fatal ( errorMessage, exc_info = True )
+          else :
+
+            self.sendException ( 'Critical exception', CRITICAL, errorMessage )
+            self.__logger.error ( errorMessage, exc_info = True )
 
   def sendException ( self, _name : str, _level : int, _exc_info : BaseException or TracebackType ) :
     messageRecord = LogRecord ( name = _name, level = _level, exc_info = _exc_info )
     self.__loggerMailer.emit ( messageRecord )
 
+  def toShow ( self ) -> str :
+    return self.__toShow
+
   def uncatchErrorException ( self ) -> None :
-    # TODO Como ajustar traceback.format_exc () al formato de self.sendException
-    #self.sendException ( 'uncaught exception', CRITICAL, traceback.format_exc () )
+    self.__toShow = 'Error no identificado, comunicarse inmediatamente con el administrador del sistema.'
+    #self.sendException ( 'uncaught exception', CRITICAL, sys.exc_info () )
     self.__logger.error ( 'uncaught exception: %s', traceback.format_exc () )

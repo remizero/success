@@ -14,7 +14,10 @@ from sqlalchemy import (
 
 
 # Application Libraries / Librerías de la Aplicación
-from utils import Strings
+from . import (
+  EnvVar,
+  Strings
+)
 
 
 # Preconditions / Precondiciones
@@ -23,7 +26,7 @@ from utils import Strings
 class Fields () :
 
   @staticmethod
-  def db_primary_key () :
+  def db_primary_key () -> Column :
     return Column (
       Integer,
       primary_key = True,
@@ -32,7 +35,7 @@ class Fields () :
     )
 
   @staticmethod
-  def db_integer ( nullable = False, default = 0 ) :
+  def db_integer ( nullable : bool = False, default = 0 ) -> Column :
     return Column (
       Integer,
       nullable = nullable,
@@ -40,33 +43,37 @@ class Fields () :
     )
 
   @staticmethod
-  def db_string ( size, nullable = False ) :
+  def db_string ( size : int, nullable : bool = False, unique : bool = False ) -> Column :
     return Column (
       String ( size ),
       nullable = nullable
     )
 
   @staticmethod
-  def db_text ( nullable = False ) :
+  def db_text ( nullable : bool = False ) -> Column :
     return Column (
       Text (),
       nullable = nullable
     )
 
   @staticmethod
-  def db_foreign_key ( model_name, nullable = False ) :
-    table_name = Strings.toPlural ( Strings.snakeCase ( model_name ) )
+  def db_foreign_key ( modelName : str, nullable : bool = False ) -> Column :
+    tableName = ''
+    if ( EnvVar.isTrue ( 'SQLALCHEMY_TABLENAME_SUCCESS_MODEL' ) ) :
+      tableName = Strings.snakeCase ( modelName )
+    else :
+      tableName = Strings.toPlural ( Strings.snakeCase ( modelName ) )
     return Column (
       Integer,
       ForeignKey (
-        '{}.id'.format ( table_name )
+        '{}.id'.format ( tableName )
       ),
       nullable = nullable,
-      comment = '{} ID'.format ( table_name )
+      comment = '{} ID'.format ( tableName )
     )
 
   @staticmethod
-  def db_datetime ( nullable = False, default = False ) :
+  def db_datetime ( nullable : bool = False, default = False ) -> Column :
     if default :
       return Column (
         DateTime ( timezone = True ),
@@ -79,7 +86,7 @@ class Fields () :
     )
 
   @staticmethod
-  def db_date ( nullable = False, default = False ) :
+  def db_date ( nullable : bool = False, default = False ) -> Column :
     if default:
       return Column (
         Date,
@@ -92,7 +99,7 @@ class Fields () :
     )
 
   @staticmethod
-  def db_boolean ( nullable = False, default = False ) :
+  def db_boolean ( nullable : bool = False, default = False ) -> Column :
     return Column (
       Boolean,
       nullable = nullable,
@@ -100,7 +107,7 @@ class Fields () :
     )
 
   @staticmethod
-  def db_decimal ( size, decimal_size, nullable = False, default = None ) :
+  def db_decimal ( size : int, decimal_size, nullable : bool = False, default = None ) -> Column :
     return Column (
       DECIMAL ( size, decimal_size ),
       nullable = nullable,
@@ -108,7 +115,7 @@ class Fields () :
     )
 
   @staticmethod
-  def db_float ( size, decimal_size, nullable = False, default = None ) :
+  def db_float ( size : int, decimal_size, nullable : bool = False, default = None ) -> Column :
     return Column (
       Float ( size, decimal_size ),
       nullable = nullable,

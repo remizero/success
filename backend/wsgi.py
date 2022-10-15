@@ -1,7 +1,6 @@
-from kernel import Success
+from kernel import success
 
-app = Success.create ()
-#wsgi_app = app.wsgi_app ()
+successApp = success.getApp ()
 
 if __name__ == "__main__" :
-  app.run (host='0.0.0.0')
+  successApp.run ()

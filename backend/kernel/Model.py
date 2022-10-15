@@ -58,11 +58,14 @@ class Model ( database.extension.Model ) :
   def findByName ( self ) :
     return self.query.filter_by ( name = self.name ).first ()
 
-  def findByFilters ( self, **kwargs ) :
+  def findByFilters ( self, many : bool = True, **kwargs ) :
     retorno = self.__validateFilters ( **kwargs )
     if retorno == True :
       kwargs [ 'deleted' ] = False
-      return self.query.filter_by ( **kwargs ).all ()
+      if ( many ) :
+        return self.query.filter_by ( **kwargs ).all ()
+      else :
+        return self.query.filter_by ( **kwargs ).first ()
     return retorno
 
   def scalar ( self, **kwargs ) :

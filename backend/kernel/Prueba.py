@@ -1,9 +1,6 @@
 # Python Libraries / Librerías Python
-from abc import (
-  ABC,
-  abstractmethod
-)
-from jsonschema import validate
+from flask_marshmallow import Schema
+
 
 # Application Libraries / Librerías de la Aplicación
 from kernel import Logger
@@ -12,7 +9,7 @@ from kernel import Logger
 # Preconditions / Precondiciones
 
 
-class Validator ( ABC ) :
+class Validator ( Schema ) :
 
   logger : Logger = None
   schema = {

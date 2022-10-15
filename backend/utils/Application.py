@@ -127,8 +127,8 @@ class Application () :
 
   @staticmethod
   def isTestingMode () -> bool :
-    return bool ( os.environ.get ( 'TESTING' ) )
+    return bool ( os.environ.get ( 'SUCCESS_TESTING' ) )
 
   @staticmethod
   def isStagingMode () -> bool :
-    return bool ( os.environ.get ( 'STAGING' ) )
+    return bool ( os.environ.get ( 'SUCCESS_STAGING' ) )

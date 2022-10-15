@@ -10,16 +10,15 @@ from utils import (
 
 
 # Preconditions / Precondiciones
-relator = Relations ( 'User' )
+relator = Relations ( 'UserRole' )
 
 
-class User ( Model ) :
+class UserRole ( Model ) :
 
   # Model Specific Attributes / Atributos específicos del modelo
-  username = Fields.db_string ( 50 )
-  password = Fields.db_string ( 255 )
-  email = Fields.db_string ( 50 )
+  user_id = Fields.db_foreign_key ( 'User' )
+  role_id = Fields.db_foreign_key ( 'Role' )
 
   # Related tables / Tablas relacionadas
-  roles = relator.manyToMany ( 'Role', 'UserRole' )
-  groups = relator.manyToMany ( 'Group', 'UserGroup' )
+  user = relator.relationalTable ( 'User' )
+  role = relator.relationalTable ( 'Role' )
