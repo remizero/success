@@ -1,37 +1,98 @@
-Que es success?
-  Success es un API-RESTFUL basado en FLASK, diseñado para servir diferentes
-  dominios, facilmente configurable. Cuenta con un sistema de administracion
-  y generacion de codigo lo que permite agilizar los tiempos de desarrollo y
-  reducir errores al programar.
-  Al modo de entender de Success, Success sige los principios de la "Filosofia
-  de Python" de forma bastante rigurosa con un adicional en lo que respecta a
-  las convenciones pues se considera que el documento "PEP 8 – Style Guide for 
-  Python Code" no cumple con las reglas N 6 y 7 de la "Filosofia de Python",
-  por lo que se han agregado espacios y saltos de linea donde probablemente no
-  este acostumbrado. Situacion que no deberia interferir en la codificacion
-  del desarrollador, pues solo tendra que trabajar en los modulos Endpoints
-  que necesita programar.
-  Success trata de seguir de manera muy estricta el regla N 2 de la "Filosofia
-  de Python" "Explícito es mejor que implícito.", por esa razon se ha
-  utilizado el tipado fuerte en casi la totalidad de definiciones de clases,
-  metodos y/o funciones de su codigo, de forma tal, que el desarrollador sepa
-  con claridad que tipo de dato ha de suministrar o recibir.
+Que es Success?
+  Success, es un sistema API-RESTFUL basado en FLASK, diseñado para facilitar
+  el desarrollo de aplicaciones basadas en HTTP, con la finalidad de servir
+  datos a diferentes clientes o dominios, facilmente configurable.
+  Success, ha sido pensado y diseñado para ser altamente configurable y a la
+  vez facil de utilizar, asi como ser utilizado por desarrolladores novatos
+  hasta profesionales del area.
+  Success, es un ecosistema autocontenido, esto quiere decir que, cuenta con
+  las herramientas requeridas para funcionar con solo ejecutar un solo comando
+  sin previa configracion.
+  Success, cuenta con un sistema de administracion para facilitar la configuracion
+  del mismo el cual solo pude ser accedido via localhost de forma predeterminada
+  por razones de seguridad, aunque podria configurarlo para ser accedido desde 
+  cualquier dominio si es su intencion. Se recomienda enfaticamnte deshabilitar
+  en entornos de desarrollo.
+  Success, cuenta con un sistema de generacion de codigo lo que permite agilizar
+  los tiempos de desarrollo y reducir los errores al programar, lo que le permite
+  enfocarse en la Logica de Negocio y no en las trivialidades CRUD de todos los
+  sistemas, del control y log de errores, asi como de notificaciones de insidencias
+  del sistema. Se recomienda enfaticamnte deshabilitar en entornos de desarrollo.
+  Success, se puede decir que es la conjuncion de dos subsistemas; uno a nivel
+  de servidor y otro a nivel de cliente, los cuales se amalgaman de forma tal,
+  que juntos ofrecen una experiencia de desarrollo libre de los traumas de
+  integracion entre frontend y backend. Aunque en este documento siempre que
+  se haga referencia a Success se referira al sistema backend desarrollado en
+  Python.
 Como obtenerlo?
+  Si esta leyendo este documento, es muy probable que lo este haciendo desde la
+  fuente original en los repositorios del proyecto alojado en github. Si ese no
+  es el caso, puede dirigirse a la siguiente direccion y seleccionar la estrategia
+  de descarga de su preferencia:
+    https://github.com/remizero/success
+  O puede descargarlo directamente:
+    $ git clone https://github.com/remizero/success.git
 Como instalarlo?
+  Para instalarlo, existen diferentes metodos de instalacion unos manuales y uno
+  automatizado, los cuales son explicados a continuacion.
+  METODO 1 Estandar - Automatizado
+    Solo hay que ejecutar el archivo install.sh, teniendo en cuenta las diferentes
+    opciones de instalacion automatizada definidas. Por omision al ejecutar el
+    archivo install.sh siempre se instalara en modo de desarrollo estandar, lo
+    que quiere decir que creara un entorno virtual basado en la version instalada
+    de Python>=3.9.2 aunque se estima que funcione sobre cualquier Python>=3.0.
+    Como ejecutar el archivo install.sh?, muy facil.
+      $ ./install.sh
+    Puede acompanarlo con las siguientes opciones o algunas combinaciones de ellas.
+    OPCIONES
+      develop
+      staging
+      testing
+      production
+      dockerized, esta opcion puede combinarla con las cuatro (4) opciones anteriores.
+
+      $ ./install.sh
+      $ ./install.sh develop (incluso asi funcionaria, es lo mismo que la ejecucion anterior)
+      $ ./install.sh staging
+      $ ./install.sh testing
+      $ ./install.sh production
+      $ ./install.sh dockerized develop
+      $ ./install.sh dockerized staging
+      $ ./install.sh dockerized testing
+      $ ./install.sh dockerized production
+    Es de hacer notar, que la ejecucion del instalador no interactua con la configuracion
+    del sistema Success. El instalador solo configura la infraestructura sobre la cual
+    trabajara el sistema Success, por lo que se recomienda configurar el sistema previamente
+    en el modo de servidor que desea trabajar. Para el modo develop no requiere modificar
+    absolutamente nada, salvo que su desarrollo lo requiera.
+  METODO 2 Clasico - Manual
+  METODO 3 Dockerized - Manual
 Como ejecutarlo?
   Existen diferentes formas de ejecutar la aplicacion.
 Estructura
   DE LOS DIRECTORIOS
   DE LOS ARCHIVOS
   Describir la estructura de archivos y directorios del sistema.
-  DE LA IDENTACION
-    Se utiliza identacion simple a dos(2) espacios.
-  DE LAS CONVENCIONES
+  DE LAS CONVENCIONES (Explicar cada modificacion a las convenciones.)
     Success utiliza una convencion muy particular y diferente a la convencion
     de Python y su comunidad. En lo particular la convencion aplicada en el
     sistema Success proviene de la experiencia y el haber trabajado en otros
     proyectos en otros lenguajes.
-    Explicar cada modificacion a las convenciones.
+    Al modo de entender de Success, Success sige los principios de la "Filosofia
+    de Python" de forma bastante rigurosa con un adicional en lo que respecta a
+    las convenciones pues se considera que el documento "PEP 8 – Style Guide for 
+    Python Code" no cumple con las reglas N 6 y 7 de la "Filosofia de Python",
+    por lo que se han agregado espacios y saltos de linea donde probablemente no
+    este acostumbrado. Situacion que no deberia interferir en la codificacion
+    del desarrollador, pues solo tendra que trabajar en los modulos Endpoints
+    que necesita programar.
+    Success trata de seguir de manera muy estricta el regla N 2 de la "Filosofia
+    de Python" "Explícito es mejor que implícito.", por esa razon se ha
+    utilizado el tipado fuerte en casi la totalidad de definiciones de clases,
+    metodos y/o funciones de su codigo, de forma tal, que el desarrollador sepa
+    con claridad que tipo de dato ha de suministrar o recibir.
+    DE LA IDENTACION
+      Se utiliza identacion simple a dos(2) espacios.
   DE LA CODIFICACION
     Todos los archivos estan codificados en UTF-8.
   DE LAS CLASES
@@ -39,11 +100,11 @@ Estructura
     una clase por archivo.
   DE LOS ATRIBUTOS
     Todos los atributos de clases, estan ordenados alfabeticamente y definidos
-    inmediatamente posterior a la definicion de clase. Los atributos de clases que
-    tienen el prefijo "_" o "__" estan ordenados primero que los demas atributos
+    inmediatamente posterior a la definicion de clase. Los atributos de clases
+    que tienen el prefijo "_" o "__" estan ordenados primero que los demas atributos
     de clase y posterior a la definicion de clase, tambien estan ordenados
     alfabeticamente.
-    Los atributos esta tipados para identificar el tipo de dato representa cada
+    Los atributos estan tipados para identificar el tipo de dato representa cada
     uno.
   DE LOS METODOS
     Todos los metodos de clases, estan ordenados alfabeticamente. Los metodos de
@@ -53,7 +114,7 @@ Estructura
     Todos los metodos estan tipados, esto con la finalidad de identificar el tipo
     de dato que retornara dicho metodo.
   DE LOS PARAMETROS
-    Los parametros esta tipados para identificar el tipo de dato que puede recibir
+    Los parametros estan tipados para identificar el tipo de dato que puede recibir
     cada metodo y como una forma de validacion simple.
   DE LOS MODELOS
     Al trabajar con Success, debe tener en cuenta que trabaja con un sistema de 
@@ -78,7 +139,7 @@ Estructura
           riesgo de fallo.
 Como funciona?
 Como funciona internamente?
-Conceptos de success
+Conceptos de Success
   App
   Api
   Modulos
@@ -95,19 +156,10 @@ La Api admin
   El modulo crear nueva Api
   El modulo crear nuevo Modulo
   El modulo crear nuevo Endpoint
+La Api Success
 El modulo auth
   permisos
   usuarios
   perfiles
 Colaboraciones y Agradecimientos
-  Sistema Logger
-    El sistema Logger SuccessLogger, esta basado enteramente en el codigo de 
-    Alexandra Zaharia, con algunas modificaciones para que se ajustara a los
-    requerimientos del sistema Success. El codigo original de SuccessLogger
-    lo pueden encontrar en la siguiente direccion:
-    https://github.com/alexandra-zaharia/python-playground/tree/main/custom_logger_console_and_or_file
-
-    y la direccion del blog, donde encontraras informacion muy interesante
-    https://alexandra-zaharia.github.io/
-
 Creditos
