@@ -8,7 +8,7 @@ from kernel.Schema import (
   Schema as SuccessSchema,
   ValidationError
 )
-from ....models import User
+from app.models import User
 
 
 # Preconditions / Precondiciones

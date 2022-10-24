@@ -237,7 +237,7 @@ class Development ( Default ) :
       port = EnvVar.get ( 'SQLALCHEMY_DB_PORT' ),
       db = EnvVar.get ( 'SQLALCHEMY_DB_NAME' )
     )
-  SQLALCHEMY_BINDS = EnvVar.get ( 'SQLALCHEMY_BINDS' )
+  SQLALCHEMY_BINDS = EnvVar.getJson ( 'SQLALCHEMY_BINDS' )
   SQLALCHEMY_ECHO = EnvVar.isTrue ( 'SQLALCHEMY_ECHO' )
   SQLALCHEMY_RECORD_QUERIES = EnvVar.isTrue ( 'SQLALCHEMY_RECORD_QUERIES' )
   SQLALCHEMY_COMMIT_ON_TEARDOWN = EnvVar.isTrue ( 'SQLALCHEMY_COMMIT_ON_TEARDOWN' )

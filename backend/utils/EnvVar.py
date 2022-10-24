@@ -1,4 +1,5 @@
 # Python Libraries / Librerías Python
+from flask import json
 import ast
 import os
 
@@ -12,7 +13,7 @@ import os
 class EnvVar () :
 
   @staticmethod
-  def get ( envVar : str ) -> str :
+  def get ( envVar : str ) :
     return os.environ.get ( envVar )
 
   @staticmethod
@@ -33,6 +34,10 @@ class EnvVar () :
     resource = resource [ : -2 ]
     resource += ' }'
     return EnvVar.toResource ( resource )
+
+  @staticmethod
+  def getJson ( envVar : str ) :
+    return json.loads ( os.environ.get ( envVar ) )
 
   @staticmethod
   def isEmpty ( envVar : str ) -> bool :

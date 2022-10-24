@@ -21,5 +21,5 @@ class User ( Model ) :
   email = Fields.db_string ( 50 )
 
   # Related tables / Tablas relacionadas
-  roles = relator.manyToMany ( 'Role', 'UserRole' )
   groups = relator.manyToMany ( 'Group', 'UserGroup' )
+  roles = relator.manyToMany ( 'Role', 'UserRole' )

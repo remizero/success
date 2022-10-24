@@ -46,15 +46,17 @@ class Endpoint ( SuccessEndpoint ) :
       inputData = input.load ( request.get_json () )
       user = User ()
       inputData [ 'password' ] = Encryption.password ( inputData [ 'password' ] )
-      userObj = user.findByFilters ( False, **inputData )
       Debug.log ( inputData [ 'password' ] )
+      userObj = user.findByFilters ( False, **inputData )
+      Debug.log ( userObj.username )
       '''
         HASTA AQUI TODO BIEN
-        AJUSTAR EL OUTPUT A LA DATA QUE DEBE RETORNAR
-        CARGAR LA DATA RESPECTIVA A LA SESSION
-        CREAR EL JWT
+        1-. AJUSTAR EL OUTPUT A LA DATA QUE DEBE RETORNAR
+            EL OUTPUT DEBE SER UNA ESTRUCTURA COMO LA QUE UTILIZO EN CORE
+            COMO ESTABLECER LOS ARCHIVOS INPUT/OUTPUT COMO ME GUSTARIA DEFINIR
+        2-. CARGAR LA DATA RESPECTIVA A LA SESSION
+        3-. CREAR EL JWT
       '''
-      Debug.log ( userObj.username )
       jsonResult = Structs.modelResultToJson ( user.findByFilters ( **inputData ) )
       self.responseData = Structs.jsonModelSessionLogin ( jsonResult )
       self.statusResponse = HTTPStatus.OK

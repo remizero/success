@@ -7,8 +7,7 @@ from extensions import database
 from utils import (
   Datetime,
   Fields,
-  Relations,
-  Strings
+  Relations
 )
 
 
@@ -27,7 +26,7 @@ class Model ( database.extension.Model ) :
   @declared_attr
   def __tablename__ ( cls ) :
     relatorAux = Relations ( cls.__name__ )
-    return relatorAux.tableName
+    return relatorAux.pluralName
 
   def __init__ ( self, **kwargs ) :
     self.inputData ( **kwargs )

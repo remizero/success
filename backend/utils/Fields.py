@@ -14,10 +14,7 @@ from sqlalchemy import (
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import (
-  EnvVar,
-  Strings
-)
+from . import Strings
 
 
 # Preconditions / Precondiciones
@@ -58,11 +55,7 @@ class Fields () :
 
   @staticmethod
   def db_foreign_key ( modelName : str, nullable : bool = False ) -> Column :
-    tableName = ''
-    if ( EnvVar.isTrue ( 'SQLALCHEMY_TABLENAME_SUCCESS_MODEL' ) ) :
-      tableName = Strings.snakeCase ( modelName )
-    else :
-      tableName = Strings.toPlural ( Strings.snakeCase ( modelName ) )
+    tableName = Strings.toPlural ( Strings.snakeCase ( modelName ) )
     return Column (
       Integer,
       ForeignKey (

@@ -6,10 +6,7 @@ from sqlalchemy.orm import (
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import (
-  EnvVar,
-  Strings
-)
+from . import Strings
 
 
 # Preconditions / Precondiciones
@@ -17,57 +14,52 @@ from . import (
 
 class Relations () :
 
-  modelName = ''
-  snakeName = ''
-  pluralName = ''
-  tableName = ''
+  modelName : str = ''
+  snakeName : str = ''
+  pluralName : str = ''
 
-  def __init__ ( self, modelName ) :
+  def __init__ ( self, modelName : str ) :
     self.modelName = modelName
     self.snakeName = Strings.snakeCase ( self.modelName )
     self.pluralName = Strings.toPlural ( self.snakeName )
-    if ( EnvVar.isTrue ( 'SQLALCHEMY_TABLENAME_SUCCESS_MODEL' ) ) :
-      self.tableName = self.snakeName
-    else :
-      self.tableName = self.pluralName
 
-  def oneToOne ( self, modelNameToRelate ) :
+  def oneToOne ( self, modelNameToRelate : str ) :
     return relationship (
       modelNameToRelate,
-      back_populates = self.tableName,
+      back_populates = self.pluralName,
       uselist = False
     )
 
-  def oneToMany ( self, modelNameToRelate ) :
+  def oneToMany ( self, modelNameToRelate : str ) :
     return relationship (
       modelNameToRelate,
-      back_populates = self.tableName,
+      back_populates = self.pluralName,
       lazy = 'dynamic'
     )
 
-  def manyToMany ( self, modelNameToRelate, secondaryTable ) :
+  def manyToMany ( self, modelNameToRelate: str , secondaryTable : str ) :
     return relationship (
       modelNameToRelate,
       secondary = Strings.toPlural ( Strings.snakeCase ( secondaryTable ) ),
-      back_populates = self.tableName,
+      back_populates = self.pluralName,
       lazy = 'dynamic'
     )
 
-  def hasOne ( self, modelNameToRelate ) :
+  def hasOne ( self, modelNameToRelate : str ) :
     return relationship (
       modelNameToRelate,
-      back_populates = self.tableName
+      back_populates = self.pluralName
     )
 
-  def hasMany ( self, modelNameToRelate ):
+  def hasMany ( self, modelNameToRelate : str ):
     return relationship (
       modelNameToRelate,
-      back_populates = self.tableName,
+      back_populates = self.pluralName,
       lazy = 'dynamic'
     )
 
   def relationalTable ( self, modelNameToRelate : str ) :
     return relationship (
       modelNameToRelate,
-      backref = backref ( self.snakeName, cascade = 'all, delete-orphan' )
+      backref = backref ( self.pluralName, cascade = 'all, delete-orphan' )
     )
