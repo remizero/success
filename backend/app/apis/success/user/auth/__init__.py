@@ -5,7 +5,8 @@ from flask_restful import Api
 
 # Application Libraries / Librerías de la Aplicación
 from .Endpoint import Endpoint
-from .Schema import Schema
+from .Input import Input
+from .Output import Output
 
 
 # Preconditions / Precondiciones

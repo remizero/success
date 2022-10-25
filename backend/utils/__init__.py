@@ -13,6 +13,7 @@ from .Fields import Fields
 from .File import File
 from .Relations import Relations
 from .Structs import Structs
+from .Schemas import Schemas
 
 
 # Preconditions / Precondiciones

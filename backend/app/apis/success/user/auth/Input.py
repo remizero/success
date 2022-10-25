@@ -5,7 +5,7 @@
 from kernel.Schema import (
   fields,
   pre_load,
-  Schema as SuccessSchema,
+  Schema,
   ValidationError
 )
 from app.models import User
@@ -14,7 +14,7 @@ from app.models import User
 # Preconditions / Precondiciones
 
 
-class Schema ( SuccessSchema ) :
+class Input ( Schema ) :
 
   class Meta :
     model = User

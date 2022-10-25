@@ -11,7 +11,8 @@ from jsonschema.exceptions import (
 
 
 # Application Libraries / Librerías de la Aplicación
-from .Schema import Schema
+from .Input import Input
+from .Output import Output
 from kernel.Endpoint import (
   Endpoint as SuccessEndpoint,
   HTTPStatus,
@@ -32,8 +33,8 @@ from utils import (
 
 
 # Preconditions / Precondiciones
-input = Schema ( only = ( 'username', 'password' ) )
-#output = Schema ()
+input = Input ( only = ( 'username', 'password' ) )
+output = Output ()
 
 
 class Endpoint ( SuccessEndpoint ) :
