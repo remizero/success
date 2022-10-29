@@ -8,14 +8,101 @@
 
 
 class Structs () :
-  
+
   @staticmethod
-  def dictToJson ( results ) :
-    myJsonList = []
-    if results is dict :
-      for result in results :
-        myJsonList.append ( result [ 0 ] )
-    return myJsonList
+  def booleanOptions () :
+    return [
+      {
+        'True' : True
+      },
+      {
+        'False' : False
+      }
+    ]
+
+  @staticmethod
+  def successOutputEmptySchema () :
+    emptySchema = {
+      'action' : '',
+      'data' : [],
+      'model' : []
+    }
+    return emptySchema.copy ()
+
+  @staticmethod
+  def successOutput ( fullSchema : bool = False ) :
+
+    emptySchema = Structs.successOutputEmptySchema ()
+    if ( fullSchema ) :
+      emptySchema [ 'model' ].append (  )
+    fullSchema = {
+      'action' : '',
+      'data' : [],
+      'model' : [
+        {
+          'name' : 'id',
+          'label' : 'ID',
+          'action' : '',
+          'htmlType' : 'input',
+          'maxLength' : '0',
+          'required' : 'False',
+          'type' : 'number'
+        },
+        {
+          'name' : 'enabled',
+          'label' : 'Habilitado',
+          'action' : '',
+          'htmlType' : 'select',
+          'maxLength' : 'None',
+          'required' : 'False',
+          'type' : 'boolean',
+          'options' : [
+            {
+              'True' : 'True'
+            },
+            {
+              'False' : 'False'
+            }
+          ]
+        },
+        {
+          'name' : 'created_at',
+          'label' : 'Creado en',
+          'action' : '',
+          'htmlType' : 'input',
+          'maxLength' : 'None',
+          'required' : 'True',
+          'type' : 'datetime-local'
+        },
+        {
+          'name' : 'updated_at',
+          'label' : 'Actualizado en',
+          'action' : '',
+          'htmlType' : 'input',
+          'maxLength' : 'None',
+          'required' : 'True',
+          'type' : 'datetime-local'
+        },
+        {
+          'name' : 'deleted',
+          'label' : 'Eliminado',
+          'action' : '',
+          'htmlType' : 'select',
+          'maxLength' : 'None',
+          'required' : 'False',
+          'type' : 'boolean',
+          'options' : [
+            {
+              'True' : 'True'
+            },
+            {
+              'False' : 'False'
+            }
+          ]
+        }
+      ]
+    }
+    return ''
   
   @staticmethod
   def getJsonKeys ( jsonData ) :
@@ -26,23 +113,25 @@ class Structs () :
     return jsonData.values ()
   
   @staticmethod
-  def jsonModelSessionLogin ( resultData ) :
-    return {
-      "username": resultData [ 0 ] [ 'username' ],
-      "email": resultData [ 0 ] [ 'email' ],
-      "name": resultData [ 0 ] [ 'name' ],
-      "lastname": resultData [ 0 ] [ 'lastname' ],
-      "group_id": resultData [ 0 ] [ 'group_id' ],
-      "loggedin": True
+  def signin () :
+    struct = {
+      'username' : '',
+      'token' : '',
+      'loggedin' : '',
+      'type' : '',
+      'status' : ''
     }
+    return struct.copy ()
   
   @staticmethod
-  def jsonModelSessionLogout ( resultData ) :
-    resultData [ 'msg' ] = 'Usuario desconectado correctamente'
-    resultData [ 'loggedin' ] = False
-    resultData [ 'type' ] = 'normal'
-    resultData [ 'status' ] = 200
-    return resultData
+  def signout () :
+    struct = {
+      'msg' : '',
+      'loggedin' : '',
+      'type' : '',
+      'status' : ''
+    }
+    return struct.copy ()
   
   @staticmethod
   def jsonModelMsgResponse ( msg : str, type : str, status : int ) :
@@ -115,10 +204,10 @@ class Structs () :
         'order' : order,
         'options' : [
           {
-            "True": "True"
+            'True' : 'True'
           },
           {
-            "False": "False"
+            'False' : 'False'
           }
         ]
       }
@@ -138,17 +227,3 @@ class Structs () :
         'order' : order
       }
     ]
-
-  @staticmethod
-  def modelResultToJson ( result ) :
-    myJsonList = []
-    if isinstance ( result, list ) :
-      for unitResult in result :
-        myJsonList.append ( unitResult.toJson () )
-    else :
-      myJsonList = result.toJson ()
-    return myJsonList
-  
-  @staticmethod
-  def toJson ( result ) :
-    return result.fetchone () [ 0 ]

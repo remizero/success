@@ -7,8 +7,10 @@ from flask import (
 
 
 # Application Libraries / Librerías de la Aplicación
-from exceptions.JsonRequestException import JsonRequestException
-from exceptions.RequestMethodException import RequestMethodException
+from exceptions import (
+  JsonRequestException,
+  RequestMethodException
+)
 
 
 # Preconditions / Precondiciones

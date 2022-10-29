@@ -33,7 +33,7 @@ class Success () :
       CREATION OF THE FLASK APPLICATION /
       CREACION DE LAS APLICACION FLASK
     """
-    #app = App ( __name__, instance_relative_config = True )
+    #self.__success = App ( __name__, instance_relative_config = True )
     self.__success = Flask ( __name__, instance_relative_config = True )
     self.__success.config.from_object ( Application.getConfigClass ( config ) )
     self.__success.config.from_pyfile ( Application.getConfigFile (), silent = True )

@@ -18,7 +18,9 @@ class Output ( SuccessOutput ) :
     super ().__init__ ( outputType, emptySchema )
 
   def data ( self, data : dict ) -> dict :
-    struct = Structs.signin ()
-    struct [ 'username' ] = data [ 'username' ]
-    struct [ 'loggedin' ] = True
+    struct = Structs.signout ()
+    struct [ 'msg' ] = 'Usuario desconectado correctamente'
+    struct [ 'loggedin' ] = False
+    struct [ 'type' ] = 'normal'
+    struct [ 'status' ] = 200
     return struct.copy ()

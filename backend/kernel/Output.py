@@ -10,10 +10,11 @@ from enum import (
 
 
 # Application Libraries / Librerías de la Aplicación
+from exceptions import OutputException
 from kernel import (
   Logger
 )
-from ..common import Schema
+from . import Schema
 
 
 # Preconditions / Precondiciones
@@ -21,15 +22,17 @@ from ..common import Schema
 class OutputType ( Enum ) :
   ERROR = 1
   EXCEPTION = 2
-  STANDARD = 3
-  SUCCESS = 4
+  LOGIN = 3
+  STANDARD = 4
+  SUCCESSFUL = 5
+  SUCCESS = 6
 
-
+# TODO reconstruir esta clase
 class Output ( ABC ) :
 
-  __output : dict = None
-  __schemaOutput : Schema = None
-
+  __output       : dict       = None
+  __outputType   : OutputType = None
+  __schemaOutput : Schema     = None
 
   schema = dict ()
   
@@ -111,13 +114,13 @@ class Output ( ABC ) :
   def __init__ ( self, outputType : OutputType = OutputType.SUCCESS, emptySchema : bool = True ) -> None :
     self.logger = Logger ( __name__ )
     if ( outputType == OutputType.SUCCESS ) :
-      self.__schemaOutput = Schema ( emptySchema )
+      self.__schemaOutput = Schema ()
     self.schema = ''
     if ( emptySchema ) :
       self.schema = self.__emptySchema.copy ()
     else :
       self.schema = self.__fullSchema.copy ()
-    raise NotImplementedError ()
+    #raise NotImplementedError ()
 
   def getOutput ( self ) -> dict :
     return self.__output
@@ -141,13 +144,38 @@ class Output ( ABC ) :
     return self.__fullSchema
 
   def setAction ( self, action : str ) -> None :
-    self.schema [ 'action' ] = action
+    if ( ( self.__outputType is not None ) and ( self.__outputType is not OutputType.SUCCESS ) ) :
+      self.schema [ 'action' ] = action
+    else :
+      raise OutputException ()
 
   def setData ( self, data : list ) -> None :
-    self.schema [ 'data' ] = data
+    if ( ( self.__outputType is not None ) and ( self.__outputType is not OutputType.SUCCESS ) ) :
+      self.schema [ 'data' ] = data
+    else :
+      raise OutputException ()
 
   def setOptions ( self, attribute : str, options : list ) -> None :
-    for model in self.schema [ 'model' ] :
-      if model [ 'name' ] == attribute :
-        model [ 'options' ] = options
-        break
+    if ( ( self.__outputType is not None ) and ( self.__outputType is not OutputType.SUCCESS ) ) :
+      for model in self.schema [ 'model' ] :
+        if model [ 'name' ] == attribute :
+          model [ 'options' ] = options
+          break
+    else :
+      raise OutputException ()
+
+  def error ( self, _msg : str, _type : str, _status : int ) -> dict :
+    return {
+      'error' : _msg,
+      'type' : _type, # warning, fatal, error, normal
+      'status' : _status #200, 401, ...
+    }
+
+  def exception ( self, _msg : str, _type : str, _status : int ) -> dict :
+    return self.error ( _msg, _type, _status )
+
+  def standard () -> dict :
+    return ''
+
+  def success () -> dict :
+    return ''

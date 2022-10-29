@@ -9,7 +9,10 @@ from config import (
   Testing,
   Staging
 )
-from kernel import Config, Debug
+from kernel import (
+  Config,
+  Debug
+)
 from exceptions import (
   DevelopmentModeException,
   ProductionModeException,
