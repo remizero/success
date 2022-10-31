@@ -41,7 +41,6 @@ class Cors ( Extension ) :
 
       # TODO Que hacer aqui
       self.__resources = self.__corsConfigDefault
-      #pass
 
     else :
 

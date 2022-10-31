@@ -7,6 +7,7 @@ from .Database import Database
 from .Email import Email
 from .Jwt import Jwt
 from .Marshmallow import Marshmallow
+from .Redis import Redis
 from .Session import Session
 
 
@@ -44,6 +45,13 @@ jwt = Jwt ()
   CREACION DEL MODULO DE CORREO
 """
 marshmallow = Marshmallow ()
+
+
+"""
+  REDIS CONFIGURATION TO WORK WITH THE FLASK APPLICATION /
+  CONFIGURACIÓN DE REDIS PARA TRABAJAR CON LA APLICACION FLASK
+"""
+redis = Redis ()
 
 
 """

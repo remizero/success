@@ -1,46 +1,30 @@
 # Python Libraries / Librerías Python
-from flask import (
-  json,
-  request,
-  session
-)
-from jsonschema.exceptions import (
-  ValidationError,
-  SchemaError
-)
 
 
 # Application Libraries / Librerías de la Aplicación
 from .Input import Input
 from .Output import Output
 from kernel.Endpoint import (
-  Endpoint as SuccessEndpoint,
-  HTTPStatus,
-  Response,
-  Encryption,
-  Http,
-  Result,
-  Structs
-)
-from exceptions import (
-  JsonRequestException,
-  OutputException
-)
-from kernel import (
   Debug,
-  Logger
+  Encryption,
+  Endpoint as SuccessEndpoint,
+  Http,
+  HTTPStatus,
+  JsonRequestException,
+  OutputException,
+  request,
+  Response,
+  Result,
+  session,
+  SchemaError,
+  Structs,
+  ValidationError
 )
 from app.models import User
-#from utils.Structs import Structs
-# from utils import (
-#   Encryption,
-#   Http,
-#   Result,
-#   Structs
-# )
 
 
 # Preconditions / Precondiciones
+#session = sessionFlask
 input = Input ( only = ( 'username', 'password' ) )
 output = Output ()
 
@@ -48,6 +32,8 @@ output = Output ()
 class Endpoint ( SuccessEndpoint ) :
 
   def post ( self ) -> Response :
+
+    #from flask import session
     
     try :
 
@@ -57,15 +43,29 @@ class Endpoint ( SuccessEndpoint ) :
       inputData [ 'password' ] = Encryption.password ( inputData [ 'password' ] )
       userObj = user.findByFilters ( False, **inputData )
       result = Result.toJson ( userObj )
+      #self.session.
+      #session [ 'id' ] = userObj.id
+      Debug.log ( type ( session ) )
+      Debug.log ( session )
+      # session = Structs.session ()
+      # Debug.log ( type ( session ) )
+      # Debug.log ( session )
+      # session [ 'id' ] = userObj.id
+      # session [ 'group_id' ] = userObj.id
+      # session [ 'role_id' ] = userObj.id
+      # 'id' : '',
+      # 'username' : '',
+      # 'group_id' : '',
+      # 'role_id' : '',
+      # 'token' : ''
       self.responseData = output.data ( result [ 0 ] )
-      self.statusResponse = HTTPStatus.OK
+      self.responseStatus = HTTPStatus.ACCEPTED
       '''
         HASTA AQUI TODO BIEN
-        1-. AJUSTAR EL OUTPUT A LA DATA QUE DEBE RETORNAR
-            EL OUTPUT DEBE SER UNA ESTRUCTURA COMO LA QUE UTILIZO EN CORE
-            COMO ESTABLECER LOS ARCHIVOS INPUT/OUTPUT COMO ME GUSTARIA DEFINIR
-        2-. CARGAR LA DATA RESPECTIVA A LA SESSION
-        3-. CREAR EL JWT
+        1-. AJUSTAR EL OUTPUT AL FORMATO SUCCESS PARA RETORNAR DE CONSULTA SOLICITADA
+        2-. AJUSTAR EL OUTPUT AL FORMATO STANDARD PARA RETORNAR DE CONSULTA SOLICITADA
+        3-. CARGAR LA DATA RESPECTIVA A LA SESSION
+        4-. CREAR EL JWT
       '''
 
     except ( 
@@ -83,7 +83,9 @@ class Endpoint ( SuccessEndpoint ) :
       self.logger.uncatchErrorException ()
       self.responseData = output.exception ( self.logger.toShow (), 'CRITICAL', HTTPStatus.BAD_REQUEST )
 
-    response = Http.returnResponse ( self.responseData, self.statusResponse )
-    # if self.statusResponse == HTTPStatus.OK :
+    finally :
+
+      self.response = Http.returnResponse ( self.responseData, self.responseStatus )
+    # if self.responseStatus == HTTPStatus.OK :
     #   JsonWebToken.create ( response )
-    return response
+    return self.response

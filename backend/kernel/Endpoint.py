@@ -16,10 +16,10 @@ from jsonschema.exceptions import (
 # Application Libraries / Librerías de la Aplicación
 from exceptions import (
   JsonRequestException,
+  OutputException,
   RequestMethodException
 )
-from . import Logger
-#from utils.Structs import Structs
+from . import Logger, Debug
 from utils import (
   Encryption,
   Http,
@@ -34,5 +34,6 @@ from utils import (
 class Endpoint ( Resource ) :
 
   logger = Logger ( __name__ )
+  response : Response = ''
   responseData = ''
-  statusResponse = HTTPStatus.BAD_REQUEST
+  responseStatus = HTTPStatus.BAD_REQUEST

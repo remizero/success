@@ -1,0 +1,10 @@
+DATA <==> <class 'werkzeug.local.LocalProxy'>
+DATA <==> <RedisSession {'_permanent': True}>
+DATA <==> <class 'werkzeug.local.LocalProxy'>
+DATA <==> <RedisSession {'_permanent': True}>
+DATA <==> <class 'werkzeug.local.LocalProxy'>
+DATA <==> <RedisSession {'_permanent': True}>
+DATA <==> <class 'werkzeug.local.LocalProxy'>
+DATA <==> <RedisSession {'_permanent': True}>
+DATA <==> <class 'werkzeug.local.LocalProxy'>
+DATA <==> <RedisSession {'_permanent': True}>

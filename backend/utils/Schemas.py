@@ -47,7 +47,7 @@ class Schemas () :
 
   # para radio, checkbox colocar 'options' : []
   # min y max pueden ser usados en los formType date, number, 
-  # TODO acer uso de estos enlaces
+  # TODO hacer uso de estos enlaces
   # https://medium.com/swlh/3-alternatives-to-if-statements-to-make-your-python-code-more-readable-91a9991fb353
   # https://skonik.me/python-alternatives-to-if-elif-statements-before-python-3-10/
   # https://www.w3schools.com/html/html_form_input_types.asp

@@ -1,4 +1,5 @@
 # Python Libraries / Librerías Python
+from datetime import timedelta
 import os
 
 
@@ -168,32 +169,16 @@ class Development ( Default ) :
 
 
   #  Redis Configuration / Configuración Redis
-  REDIS_HOST = EnvVar.get ( 'REDIS_HOST' )
-  REDIS_PORT = int ( EnvVar.get ( 'REDIS_PORT' ) )
+  REDIS_CHARSET = EnvVar.get ( 'REDIS_CHARSET' )
+  REDIS_CONNECTION_POOL = EnvVar.get ( 'REDIS_CONNECTION_POOL' )
   REDIS_DB = int ( EnvVar.get ( 'REDIS_DB' ) )
   REDIS_DECODE_RESPONSES = EnvVar.isTrue ( 'REDIS_DECODE_RESPONSES' )
-
-  # host="localhost",
-  # port=6379,
-  # db=0,
-  # password=EnvVar.get ( 'asdf' ),
-  # socket_timeout=EnvVar.get ( 'asdf' ),
-  # socket_connect_timeout=EnvVar.get ( 'asdf' ),
-  # socket_keepalive=EnvVar.isTrue ( 'asdf' ),
-  # socket_keepalive_options=EnvVar.get ( 'asdf' ),
-  # socket_type=0,
-  # retry_on_timeout=EnvVar.isTrue ( 'asdf' ),
-  # retry_on_error=SENTINEL,
-  # encoding="utf-8",
-  # encoding_errors="strict",
-  # decode_responses=EnvVar.isTrue ( 'asdf' ),
-  # parser_class=DefaultParser,
-  # socket_read_size=65536,
-  # health_check_interval=0,
-  # client_name=EnvVar.get ( 'asdf' ),
-  # username=EnvVar.get ( 'asdf' ),
-  # retry=EnvVar.get ( 'asdf' ),
-  # redis_connect_func=EnvVar.get ( 'asdf' )
+  REDIS_ERRORS = EnvVar.get ( 'REDIS_ERRORS' )
+  REDIS_HOST = EnvVar.get ( 'REDIS_HOST' )
+  REDIS_PASSWORD = EnvVar.get ( 'REDIS_PASSWORD' )
+  REDIS_PORT = int ( EnvVar.get ( 'REDIS_PORT' ) )
+  REDIS_SOCKET_TIMEOUT = EnvVar.get ( 'REDIS_SOCKET_TIMEOUT' )
+  REDIS_UNIX_SOCKET_PATH = EnvVar.get ( 'REDIS_UNIX_SOCKET_PATH' )
 
 
   # ---------------------------------------------
@@ -209,7 +194,7 @@ class Development ( Default ) :
   SESSION_COOKIE_PATH = EnvVar.get ( 'SESSION_COOKIE_PATH' )
   SESSION_COOKIE_HTTPONLY = EnvVar.get ( 'SESSION_COOKIE_HTTPONLY' )
   SESSION_COOKIE_SECURE = EnvVar.get ( 'SESSION_COOKIE_SECURE' )
-  PERMANENT_SESSION_LIFETIME = EnvVar.get ( 'PERMANENT_SESSION_LIFETIME' )
+  PERMANENT_SESSION_LIFETIME = timedelta ( seconds = int ( EnvVar.get ( 'PERMANENT_SESSION_LIFETIME' ) ) )
   SESSION_TYPE = EnvVar.get ( 'SESSION_TYPE' )
   SESSION_PERMANENT = EnvVar.get ( 'SESSION_PERMANENT' )
   SESSION_USE_SIGNER = EnvVar.get ( 'SESSION_USE_SIGNER' )

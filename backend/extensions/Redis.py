@@ -1,6 +1,6 @@
 # Python Libraries / Librerías Python
 from flask import Flask
-from flask_session import Session as FlaskSession
+from flask_redis import Redis as FlaskRedis
 
 
 # Application Libraries / Librerías de la Aplicación
@@ -10,11 +10,11 @@ from kernel import Extension
 # Preconditions / Precondiciones
 
 
-class Session ( Extension ) :
+class Redis ( Extension ) :
 
   def __init__ ( self ) -> None :
     super ().__init__ ()
-    self.extension = FlaskSession ()
+    self.extension = FlaskRedis ()
 
   def config ( self ) -> None :
     pass

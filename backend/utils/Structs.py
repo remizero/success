@@ -8,6 +8,38 @@
 
 
 class Structs () :
+  
+  @staticmethod
+  def session () :
+    struct = {
+      'id' : '',
+      'username' : '',
+      'group_id' : '',
+      'role_id' : '',
+      'token' : ''
+    }
+    return struct.copy ()
+  
+  @staticmethod
+  def signin () :
+    struct = {
+      'username' : '',
+      'token' : '',
+      'loggedin' : '',
+      'type' : '',
+      'status' : ''
+    }
+    return struct.copy ()
+  
+  @staticmethod
+  def signout () :
+    struct = {
+      'msg' : '',
+      'loggedin' : '',
+      'type' : '',
+      'status' : ''
+    }
+    return struct.copy ()
 
   @staticmethod
   def booleanOptions () :
@@ -111,27 +143,6 @@ class Structs () :
   @staticmethod
   def getJsonValues ( jsonData ) :
     return jsonData.values ()
-  
-  @staticmethod
-  def signin () :
-    struct = {
-      'username' : '',
-      'token' : '',
-      'loggedin' : '',
-      'type' : '',
-      'status' : ''
-    }
-    return struct.copy ()
-  
-  @staticmethod
-  def signout () :
-    struct = {
-      'msg' : '',
-      'loggedin' : '',
-      'type' : '',
-      'status' : ''
-    }
-    return struct.copy ()
   
   @staticmethod
   def jsonModelMsgResponse ( msg : str, type : str, status : int ) :

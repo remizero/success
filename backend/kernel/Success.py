@@ -10,6 +10,7 @@ from extensions import (
   email,
   jwt,
   marshmallow,
+  redis,
   session
 )
 from . import Blueprints
@@ -43,6 +44,7 @@ class Success () :
     # ---------------------------------------
     cors.register ( self.__success )
     jwt.register ( self.__success )
+    redis.register ( self.__success )
     session.register ( self.__success )
     database.register ( self.__success )
     marshmallow.register ( self.__success )
