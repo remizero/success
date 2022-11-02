@@ -2,7 +2,6 @@
 from flask import (
   json,
   request,
-  session,
   Response
 )
 from flask_restful import Resource
@@ -20,6 +19,10 @@ from exceptions import (
   RequestMethodException
 )
 from . import Logger, Debug
+from managers import (
+  Permissions,
+  Session
+)
 from utils import (
   Encryption,
   Http,

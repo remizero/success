@@ -14,7 +14,7 @@ from sqlalchemy import (
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import Strings
+from utils import Strings
 
 
 # Preconditions / Precondiciones

@@ -4,11 +4,11 @@ from sqlalchemy.ext.declarative import declared_attr
 
 # Application Libraries / Librerías de la Aplicación
 from extensions import database
-from utils import (
-  Datetime,
+from managers import (
   Fields,
   Relations
 )
+from utils import Datetime
 
 
 # Preconditions / Precondiciones

@@ -2,9 +2,9 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Model
-from utils import (
+from kernel.Model import (
   Fields,
+  Model,
   Relations
 )
 

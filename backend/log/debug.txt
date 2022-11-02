@@ -2,9 +2,15 @@ DATA <==> <class 'werkzeug.local.LocalProxy'>
 DATA <==> <RedisSession {'_permanent': True}>
 DATA <==> <class 'werkzeug.local.LocalProxy'>
 DATA <==> <RedisSession {'_permanent': True}>
+DATA <==> ce91ff5d-e396-42e6-88e4-bca064b5cfd2
 DATA <==> <class 'werkzeug.local.LocalProxy'>
 DATA <==> <RedisSession {'_permanent': True}>
+DATA <==> 54836d91-8ffb-4bb3-9617-fcb8e68507d6
 DATA <==> <class 'werkzeug.local.LocalProxy'>
 DATA <==> <RedisSession {'_permanent': True}>
+DATA <==> <RedisSession {'_permanent': True, 'id': 1, 'ip_address': '127.0.0.1'}>
+DATA <==> 7b46229b-d2c6-40fe-9631-31c3d82f91c6
 DATA <==> <class 'werkzeug.local.LocalProxy'>
 DATA <==> <RedisSession {'_permanent': True}>
+DATA <==> <RedisSession {'_permanent': True, 'id': 1, 'ipAddress': '127.0.0.1'}>
+DATA <==> 16a16cfa-1b2c-4577-8e90-95ecd96a2f26

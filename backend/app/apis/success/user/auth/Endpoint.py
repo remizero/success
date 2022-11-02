@@ -12,10 +12,11 @@ from kernel.Endpoint import (
   HTTPStatus,
   JsonRequestException,
   OutputException,
+  Permissions,
   request,
   Response,
   Result,
-  session,
+  Session,
   SchemaError,
   Structs,
   ValidationError
@@ -24,7 +25,6 @@ from app.models import User
 
 
 # Preconditions / Precondiciones
-#session = sessionFlask
 input = Input ( only = ( 'username', 'password' ) )
 output = Output ()
 
@@ -33,8 +33,6 @@ class Endpoint ( SuccessEndpoint ) :
 
   def post ( self ) -> Response :
 
-    #from flask import session
-    
     try :
 
       Http.requestIsJson ()
@@ -43,21 +41,7 @@ class Endpoint ( SuccessEndpoint ) :
       inputData [ 'password' ] = Encryption.password ( inputData [ 'password' ] )
       userObj = user.findByFilters ( False, **inputData )
       result = Result.toJson ( userObj )
-      #self.session.
-      #session [ 'id' ] = userObj.id
-      Debug.log ( type ( session ) )
-      Debug.log ( session )
-      # session = Structs.session ()
-      # Debug.log ( type ( session ) )
-      # Debug.log ( session )
-      # session [ 'id' ] = userObj.id
-      # session [ 'group_id' ] = userObj.id
-      # session [ 'role_id' ] = userObj.id
-      # 'id' : '',
-      # 'username' : '',
-      # 'group_id' : '',
-      # 'role_id' : '',
-      # 'token' : ''
+      Session.create ( userObj )
       self.responseData = output.data ( result [ 0 ] )
       self.responseStatus = HTTPStatus.ACCEPTED
       '''
@@ -66,6 +50,7 @@ class Endpoint ( SuccessEndpoint ) :
         2-. AJUSTAR EL OUTPUT AL FORMATO STANDARD PARA RETORNAR DE CONSULTA SOLICITADA
         3-. CARGAR LA DATA RESPECTIVA A LA SESSION
         4-. CREAR EL JWT
+        5-. Manejo de permisos
       '''
 
     except ( 
