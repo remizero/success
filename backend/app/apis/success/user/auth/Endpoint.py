@@ -11,6 +11,7 @@ from kernel.Endpoint import (
   Http,
   HTTPStatus,
   JsonRequestException,
+  jwt,
   OutputException,
   Permissions,
   request,
@@ -41,9 +42,8 @@ class Endpoint ( SuccessEndpoint ) :
       inputData [ 'password' ] = Encryption.password ( inputData [ 'password' ] )
       userObj = user.findByFilters ( False, **inputData )
       result = Result.toJson ( userObj )
-      Session.create ( userObj )
-      self.responseData = output.data ( result [ 0 ] )
-      self.responseStatus = HTTPStatus.ACCEPTED
+      self.data = output.data ( result [ 0 ] )
+      self.status = HTTPStatus.ACCEPTED
       '''
         HASTA AQUI TODO BIEN
         1-. AJUSTAR EL OUTPUT AL FORMATO SUCCESS PARA RETORNAR DE CONSULTA SOLICITADA
@@ -51,6 +51,7 @@ class Endpoint ( SuccessEndpoint ) :
         3-. CARGAR LA DATA RESPECTIVA A LA SESSION
         4-. CREAR EL JWT
         5-. Manejo de permisos
+        6-. Agregar el nombre del usuario en el output
       '''
 
     except ( 
@@ -61,16 +62,17 @@ class Endpoint ( SuccessEndpoint ) :
     ) as exception :
 
       self.logger.log ( exception )
-      self.responseData = output.exception ( self.logger.toShow (), 'CRITICAL', HTTPStatus.BAD_REQUEST )
+      self.data = output.exception ( self.logger.toShow (), 'CRITICAL', HTTPStatus.BAD_REQUEST )
 
     except :
 
       self.logger.uncatchErrorException ()
-      self.responseData = output.exception ( self.logger.toShow (), 'CRITICAL', HTTPStatus.BAD_REQUEST )
+      self.data = output.exception ( self.logger.toShow (), 'CRITICAL', HTTPStatus.BAD_REQUEST )
 
     finally :
 
-      self.response = Http.returnResponse ( self.responseData, self.responseStatus )
-    # if self.responseStatus == HTTPStatus.OK :
-    #   JsonWebToken.create ( response )
+      self.response = Http.response ( self.data, self.status )
+      if self.status == HTTPStatus.ACCEPTED :
+        ( self.response, token ) = jwt.create ( self.response )
+        Session.create ( userObj, token )
     return self.response

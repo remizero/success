@@ -4,6 +4,7 @@ from flask import (
   request,
   Response
 )
+from typing import Any
 
 
 # Application Libraries / Librerías de la Aplicación
@@ -47,9 +48,9 @@ class Http () :
     raise JsonRequestException ()
 
   @staticmethod
-  def returnResponse ( responseData, statusResponse ) -> Response :
+  def response ( data : Any, status : int ) -> Response :
     return Response (
-      response = json.dumps ( responseData ),
-      status = statusResponse,
+      response = json.dumps ( data ),
+      status = status,
       mimetype = 'application/json'
     )

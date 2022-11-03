@@ -52,6 +52,10 @@ class EnvVar () :
     return envVarList [ index ].__repr__ ()
 
   @staticmethod
+  def toInt ( envVar : str ) :
+    return int ( os.environ.get ( envVar ) )
+
+  @staticmethod
   def toList ( envVar : str ) -> list :
     toReturn = list ()
     if ( EnvVar.wellFormedList ( envVar ) ) :

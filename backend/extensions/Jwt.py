@@ -21,14 +21,15 @@ from flask_jwt_extended import (
   unset_jwt_cookies,
 )
 from http import HTTPStatus
-import redis
+from redis import StrictRedis
 
 
 # Application Libraries / Librerías de la Aplicación
 from exceptions import RevokeJwtException
 from kernel import (
   Extension,
-  Logger
+  Logger,
+  Debug
 )
 #from app.models import TokenBlacklist
 #from src.models.user import User
@@ -55,7 +56,7 @@ class Jwt ( Extension ) :
     super ().register ( _app )
     self.extension.init_app ( _app )
     with _app.app_context () :
-      jwt_redis_blocklist = redis.StrictRedis (
+      jwt_redis_blocklist = StrictRedis (
         host = current_app.config [ 'REDIS_HOST' ],
         port = current_app.config [ 'REDIS_PORT' ],
         db = current_app.config [ 'REDIS_DB' ],
@@ -65,16 +66,18 @@ class Jwt ( Extension ) :
   def userConfig ( self, **kwargs ) -> None :
     pass
 
-  #@staticmethod
-  def create ( response : Response ) -> Response :
+  @staticmethod
+  def create ( response : Response ) -> tuple ( [ Response, str ] ) :
     responseAux = response.get_json ()
     access_token = create_access_token ( identity = responseAux [ 'username' ] )
     refresh_token = create_refresh_token ( identity = responseAux [ 'username' ] )
     responseAux [ 'token' ] = access_token
     response.data = json.dumps ( responseAux )
+    Debug.log ( 'CREO EL TOKEN' )
     set_access_cookies ( response, access_token )
     set_refresh_cookies ( response, refresh_token )
-    return response
+    Debug.log ( 'CREO LAS COOKIES' )
+    return tuple ( [ response, access_token ] )
 
   # Callback function to check if a JWT exists in the database blocklist
   #@staticmethod

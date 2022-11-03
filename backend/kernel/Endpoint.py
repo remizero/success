@@ -19,6 +19,7 @@ from exceptions import (
   RequestMethodException
 )
 from . import Logger, Debug
+from extensions import jwt
 from managers import (
   Permissions,
   Session
@@ -38,5 +39,5 @@ class Endpoint ( Resource ) :
 
   logger = Logger ( __name__ )
   response : Response = ''
-  responseData = ''
-  responseStatus = HTTPStatus.BAD_REQUEST
+  data = ''
+  status = HTTPStatus.BAD_REQUEST

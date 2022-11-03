@@ -21,6 +21,8 @@ class Session () :
     Debug.log ( session )
     session [ 'id' ] = user.id
     session [ 'ipAddress' ] = request.remote_addr
+    if ( token is not None ) :
+      session [ 'token' ] = token
     #session [ 'group_id' ] = user.group_id
     #session [ 'role_id' ] = user.role_id
     Debug.log ( session )
