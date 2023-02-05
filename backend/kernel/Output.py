@@ -44,6 +44,10 @@ class Output ( ABC ) :
 
       self.__schemaOutput = Schema ()
 
+  @abstractmethod
+  def data ( self, data : dict ) -> dict :
+    pass
+
   def output ( self ) -> dict :
     if ( self.__successOutput ) :
 
