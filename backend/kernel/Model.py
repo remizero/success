@@ -17,11 +17,11 @@ from utils import Datetime
 class Model ( database.extension.Model ) :
 
   __abstract__ = True
-  id = Fields.db_primary_key ()
-  enabled = Fields.db_boolean ()
-  created_at = Fields.db_datetime ( default = Datetime.getNow () )
-  updated_at = Fields.db_datetime ( nullable = True, default = None )
-  deleted = Fields.db_boolean ()
+  id = Fields.primaryKey ()
+  enabled = Fields.boolean ()
+  created_at = Fields.datetime ( default = Datetime.getNow () )
+  updated_at = Fields.datetime ( nullable = True, default = None )
+  deleted = Fields.boolean ()
 
   @declared_attr
   def __tablename__ ( cls ) :
@@ -82,7 +82,7 @@ class Model ( database.extension.Model ) :
     database.extension.session.commit ()
 
   def toJson ( self ) :
-    fe_dict = self.__dict__
+    fe_dict = self.__dict__.copy ()
     del fe_dict [ '_sa_instance_state' ]
     return fe_dict
 

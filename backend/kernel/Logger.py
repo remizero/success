@@ -38,6 +38,9 @@ from utils import (
 
 
 # Preconditions / Precondiciones
+# TODO PARA COLOREAR EL OUTPUT POR CONSOLA
+# https://stackoverflow.com/questions/32906686/friendly-query-logging-in-sqlalchemy
+
 # https://docs.python.org/es/3/howto/logging-cookbook.html
 # https://docs.python.org/es/3/howto/logging.html
 # https://docs.python.org/es/3.9/library/logging.handlers.html

@@ -16,10 +16,11 @@ relator = Relations ( 'User' )
 class User ( Model ) :
 
   # Model Specific Attributes / Atributos específicos del modelo
-  username = Fields.db_string ( 50 )
-  password = Fields.db_string ( 255 )
-  email = Fields.db_string ( 50 )
+  username = Fields.string ( 50 )
+  password = Fields.string ( 255 )
+  email = Fields.string ( 50 )
 
   # Related tables / Tablas relacionadas
   groups = relator.manyToMany ( 'Group', 'UserGroup' )
+  profiles = relator.manyToMany ( 'Profile', 'UserProfile' )
   roles = relator.manyToMany ( 'Role', 'UserRole' )

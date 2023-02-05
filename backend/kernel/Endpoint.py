@@ -18,7 +18,13 @@ from exceptions import (
   OutputException,
   RequestMethodException
 )
-from . import Logger, Debug
+from . import (
+  Logger,
+  Model,
+  Debug,
+  Output,
+  Schema
+)
 from extensions import jwt
 from managers import (
   Permissions,
@@ -27,7 +33,7 @@ from managers import (
 from utils import (
   Encryption,
   Http,
-  Result,
+  Resultset,
   Structs
 )
 
@@ -37,7 +43,16 @@ from utils import (
 
 class Endpoint ( Resource ) :
 
-  logger = Logger ( __name__ )
-  response : Response = ''
-  data = ''
-  status = HTTPStatus.BAD_REQUEST
+  input    : Schema   = None
+  inputData           = None
+  logger              = Logger ( __name__ )
+  model    : Model    = None
+  output   : Output   = None
+  response : Response = None
+  data                = None
+  status              = HTTPStatus.BAD_REQUEST
+
+  def __init__( self ) -> None :
+    super ().__init__ ()
+    if ( Http.isMethod ( 'POST' ) ) :
+      self.inputData = self.input.load ( request.get_json () )

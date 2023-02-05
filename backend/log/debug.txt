@@ -1,9 +1,0 @@
-DATA <==> token
-DATA <==> CREO EL TOKEN
-DATA <==> CREO LAS COOKIES
-DATA <==> <class 'werkzeug.local.LocalProxy'>
-DATA <==> <RedisSession {'_permanent': True}>
-DATA <==> <RedisSession {'_permanent': True, 'id': 1, 'ipAddress': '127.0.0.1', 'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NzQ0OTQ1MCwianRpIjoiOGM4ZTdjYjUtZDk1Mi00YWMxLThiODctYTMwZmRmODcxNjVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJlbWl6ZXJvIiwibmJmIjoxNjY3NDQ5NDUwLCJjc3JmIjoiODM1NzA0MWEtMjRiNi00YjMzLTkyMTktM2RlNDIwNmI2NWJiIiwiZXhwIjoxNjY3NTM1ODUwfQ.czO-R-XFsyegTh_KhcmN-9I2Ff1XbHL7vXQTXhLL03g'}>
-DATA <==> a4d3a6ea-ef7d-4444-ad34-30333a77b7ea
-DATA <==> token
-DATA <==> eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NzQ0OTQ1MCwianRpIjoiOGM4ZTdjYjUtZDk1Mi00YWMxLThiODctYTMwZmRmODcxNjVlIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InJlbWl6ZXJvIiwibmJmIjoxNjY3NDQ5NDUwLCJjc3JmIjoiODM1NzA0MWEtMjRiNi00YjMzLTkyMTktM2RlNDIwNmI2NWJiIiwiZXhwIjoxNjY3NTM1ODUwfQ.czO-R-XFsyegTh_KhcmN-9I2Ff1XbHL7vXQTXhLL03g

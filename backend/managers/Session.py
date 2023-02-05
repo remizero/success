@@ -7,7 +7,10 @@ from typing import Any
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Debug
+from kernel import (
+  Debug,
+  Logger
+)
 
 
 # Preconditions / Precondiciones
@@ -17,20 +20,26 @@ class Session () :
 
   @staticmethod
   def create ( user, token : str = None ) -> None :
-    Debug.log ( type ( session ) )
-    Debug.log ( session )
+    logger = Logger ( __name__ )
     session [ 'id' ] = user.id
     session [ 'ipAddress' ] = request.remote_addr
     if ( token is not None ) :
       session [ 'token' ] = token
-    #session [ 'group_id' ] = user.group_id
-    #session [ 'role_id' ] = user.role_id
-    Debug.log ( session )
-    Debug.log ( session.sid )
+    groupsUser = user.groups.filter_by ().all ()
+    session [ 'group_id' ] = groupsUser [ 0 ].id
+    profiles = user.profiles.filter_by ().all ()
+    session [ 'profile_id' ] = profiles [ 0 ].id
+    roles = user.roles.filter_by ().all ()
+    session [ 'role_id' ] = roles [ 0 ].id
+    session [ 'loggedin' ] = True
 
   @staticmethod
   def destroy () -> None :
     session.clear ()
+
+  @staticmethod
+  def exist ( key : str ) -> bool :
+    return key not in session
 
   @staticmethod
   def get ( key : str ) -> Any :

@@ -19,7 +19,7 @@ from kernel.Endpoint import (
   Response,
   Encryption,
   Http,
-  Result,
+  Resultset,
   Structs
 )
 from exceptions import (
@@ -35,7 +35,7 @@ from app.models import User
 # from utils import (
 #   Encryption,
 #   Http,
-#   Result,
+#   Resultset,
 #   Structs
 # )
 
@@ -56,7 +56,7 @@ class Endpoint ( SuccessEndpoint ) :
       user = User ()
       inputData [ 'password' ] = Encryption.password ( inputData [ 'password' ] )
       userObj = user.findByFilters ( False, **inputData )
-      result = Result.toJson ( userObj )
+      result = Resultset.toJson ( userObj )
       self.responseData = output.data ( result [ 0 ] )
       self.statusResponse = HTTPStatus.OK
       '''

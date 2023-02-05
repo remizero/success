@@ -14,7 +14,10 @@ from extensions import (
   session
 )
 from . import Blueprints
-from utils import Application
+from utils import (
+  Application,
+  EnvVar
+)
 
 
 # Preconditions / Precondiciones
@@ -38,16 +41,23 @@ class Success () :
     self.__success = Flask ( __name__, instance_relative_config = True )
     self.__success.config.from_object ( Application.getConfigClass ( config ) )
     self.__success.config.from_pyfile ( Application.getConfigFile (), silent = True )
-    email.register ( self.__success )
+    if ( EnvVar.isTrue ( 'SUCCESS_EXTENSION_EMAIL' ) ) :
+      email.register ( self.__success )
     # ---------------------------------------
     # AQUI DEBERIA IR LA CLASE LOGGER
     # ---------------------------------------
-    cors.register ( self.__success )
-    jwt.register ( self.__success )
-    redis.register ( self.__success )
-    session.register ( self.__success )
-    database.register ( self.__success )
-    marshmallow.register ( self.__success )
+    if ( EnvVar.isTrue ( 'SUCCESS_EXTENSION_CORS' ) ) :
+      cors.register ( self.__success )
+    if ( EnvVar.isTrue ( 'SUCCESS_EXTENSION_JWT' ) ) :
+      jwt.register ( self.__success )
+    if ( EnvVar.isTrue ( 'SUCCESS_EXTENSION_REDIS' ) ) :
+      redis.register ( self.__success )
+    if ( EnvVar.isTrue ( 'SUCCESS_EXTENSION_SESSION' ) ) :
+      session.register ( self.__success )
+    if ( EnvVar.isTrue ( 'SUCCESS_EXTENSION_SQLALCHEMY' ) ) :
+      database.register ( self.__success )
+    if ( EnvVar.isTrue ( 'SUCCESS_EXTENSION_MARSHMALLOW' ) ) :
+      marshmallow.register ( self.__success )
     """
       CONFIGURATION FOR HANDLING SUCCESS SYSTEM ROUTES /
       CONFIGURACIÓN PARA EL MANEJO DE LAS RUTAS DEL SISTEMA SUCCESS

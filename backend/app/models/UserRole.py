@@ -16,8 +16,8 @@ relator = Relations ( 'UserRole' )
 class UserRole ( Model ) :
 
   # Model Specific Attributes / Atributos específicos del modelo
-  user_id = Fields.db_foreign_key ( 'User' )
-  role_id = Fields.db_foreign_key ( 'Role' )
+  user_id = Fields.foreignKey ( 'User', primaryKey = True )
+  role_id = Fields.foreignKey ( 'Role', primaryKey = True )
 
   # Related tables / Tablas relacionadas
   user = relator.relationalTable ( 'User' )

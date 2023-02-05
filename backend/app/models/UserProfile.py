@@ -10,15 +10,15 @@ from kernel.Model import (
 
 
 # Preconditions / Precondiciones
-relator = Relations ( 'TokenBlacklist' )
+relator = Relations ( 'UserProfile' )
 
 
-class TokenBlacklist ( Model ) :
+class UserProfile ( Model ) :
 
   # Model Specific Attributes / Atributos específicos del modelo
-  jti = Fields.string ( 36 )
-  type = Fields.string ( 10 )
-  user_id = Fields.foreignKey ( 'User' )
+  user_id = Fields.foreignKey ( 'User', primaryKey = True )
+  profile_id = Fields.foreignKey ( 'Profile', primaryKey = True )
 
   # Related tables / Tablas relacionadas
-  # users = relator.hasOne ( 'User' )
+  user = relator.relationalTable ( 'User' )
+  profile = relator.relationalTable ( 'Profile' )

@@ -24,6 +24,7 @@ class Structs () :
   def signin () :
     struct = {
       'username' : '',
+      'fullname' : '',
       'token' : '',
       'loggedin' : '',
       'type' : '',
@@ -56,17 +57,19 @@ class Structs () :
   def successOutputEmptySchema () :
     emptySchema = {
       'action' : '',
-      'data' : [],
-      'model' : []
+      'data' : list (),
+      'model' : list ()
     }
     return emptySchema.copy ()
 
   @staticmethod
-  def successOutput ( fullSchema : bool = False ) :
-
-    emptySchema = Structs.successOutputEmptySchema ()
-    if ( fullSchema ) :
-      emptySchema [ 'model' ].append (  )
+  def successBaseOutput () :
+    schemaList = list ()
+    schemaList.append ( Structs.jsonInputSchema ( 'id', 'ID', '', 'input', '', 'False', 1 ) )
+    schemaList.append ( Structs.jsonSelectBooleanSchema ( 'enabled', 'Habilitado', '', 'False', 2 ) )
+    schemaList.append ( Structs.jsonInputSchema ( 'created_at', 'Creado en', '', 'input', 'True', 'datetime-local', 3 ) )
+    schemaList.append ( Structs.jsonInputSchema ( 'updated_at', 'Actualizado en', '', 'input', 'False', 'datetime-local', 4 ) )
+    schemaList.append ( Structs.jsonSelectBooleanSchema ( 'deleted', 'Eliminado', '', 'False', 5 ) )
     fullSchema = {
       'action' : '',
       'data' : [],
@@ -134,7 +137,7 @@ class Structs () :
         }
       ]
     }
-    return ''
+    return schemaList.copy ()
   
   @staticmethod
   def getJsonKeys ( jsonData ) :
@@ -154,87 +157,77 @@ class Structs () :
 
   @staticmethod
   def jsonInputSchema ( name, label, action, maxLength, required, type, order ) :
-    return [
-      {
-        'name' : name,
-        'label' : label,
-        'action' : action,
-        'htmlType' : 'input',
-        'maxLength' : maxLength,
-        'required' : required,
-        'type' : type,
-        'order' : order
-      }
-    ]
+    return {
+      'name' : name,
+      'label' : label,
+      'action' : action,
+      'htmlType' : 'input',
+      'maxLength' : maxLength,
+      'required' : required,
+      'type' : type,
+      'order' : order
+    }
 
   @staticmethod
   def jsonInputRangeSchema ( name, label, action, maxLength, required, type, min, max, step, order ) :
-    return [
-      {
-        'name' : name,
-        'label' : label,
-        'action' : action,
-        'htmlType' : 'input',
-        'maxLength' : maxLength,
-        'required' : required,
-        'type' : type,
-        'order' : order,
-        'min' : min,
-        'max' : max,
-        'step' : step
-      }
-    ]
+    return {
+      'name' : name,
+      'label' : label,
+      'action' : action,
+      'htmlType' : 'input',
+      'maxLength' : maxLength,
+      'required' : required,
+      'type' : type,
+      'order' : order,
+      'min' : min,
+      'max' : max,
+      'step' : step
+    }
 
   @staticmethod
   def jsonSelectSchema ( name, label, action, maxLength, required, type, order ) :
-    return [
-      {
-        'name' : name,
-        'label' : label,
-        'action' : action,
-        'htmlType' : 'select',
-        'maxLength' : maxLength,
-        'required' : required,
-        'type' : type,
-        'order' : order,
-        'options' : []
-      }
-    ]
+    return {
+      'name' : name,
+      'label' : label,
+      'action' : action,
+      'htmlType' : 'select',
+      'maxLength' : maxLength,
+      'required' : required,
+      'type' : type,
+      'order' : order,
+      'options' : []
+    }
 
   @staticmethod
   def jsonSelectBooleanSchema ( name, label, action, required, order ) :
-    return [
-      {
-        'name' : name,
-        'label' : label,
-        'action' : action,
-        'htmlType' : 'select',
-        'maxLength' : '',
-        'required' : required,
-        'type' : 'boolean',
-        'order' : order,
-        'options' : [
-          {
-            'True' : 'True'
-          },
-          {
-            'False' : 'False'
-          }
-        ]
-      }
-    ]
+    return {
+      'name' : name,
+      'label' : label,
+      'action' : action,
+      'htmlType' : 'select',
+      'maxLength' : '',
+      'required' : required,
+      'type' : 'boolean',
+      'order' : order,
+      'options' : [
+        {
+          'True' : 'True'
+        },
+        {
+          'False' : 'False'
+        }
+      ]
+    }
 
   @staticmethod
   def jsonTextareaSchema ( name, label, maxLength, required, order ) :
-    return [
-      {
-        'name' : name,
-        'label' : label,
-        'action' : '',
-        'htmlType' : 'textarea',
-        'maxLength' : maxLength,
-        'required' : required,
-        'type' : 'text',
-        'order' : order
-      }
-    ]
+    return {
+      'name' : name,
+      'label' : label,
+      'action' : '',
+      'htmlType' : 'textarea',
+      'maxLength' : maxLength,
+      'required' : required,
+      'type' : 'text',
+      'order' : order
+    }

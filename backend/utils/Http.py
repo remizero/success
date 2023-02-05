@@ -36,6 +36,10 @@ class Http () :
     return Http.__isMethod ( 'PUT' )
 
   @staticmethod
+  def isMethod ( method : str ) -> bool :
+    return request.method == method
+
+  @staticmethod
   def __isMethod ( method : str ) -> bool :
     if request.method == method :
       return True

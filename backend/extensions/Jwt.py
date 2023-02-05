@@ -35,6 +35,7 @@ from kernel import (
 #from src.models.user import User
 from utils import (
   Datetime,
+  EnvVar,
   Http
 )
 
@@ -69,14 +70,19 @@ class Jwt ( Extension ) :
   @staticmethod
   def create ( response : Response ) -> tuple ( [ Response, str ] ) :
     responseAux = response.get_json ()
-    access_token = create_access_token ( identity = responseAux [ 'username' ] )
-    refresh_token = create_refresh_token ( identity = responseAux [ 'username' ] )
-    responseAux [ 'token' ] = access_token
+    access_token = ''
+    refresh_token = ''
+    if ( EnvVar.isTrue ( 'SUCCESS_OUTPUT_MODEL' ) ) :
+      access_token = create_access_token ( identity = responseAux [ 'data' ] [ 0 ] [ 'username' ] )
+      refresh_token = create_refresh_token ( identity = responseAux [ 'data' ] [ 0 ] [ 'username' ] )
+      responseAux [ 'data' ] [ 0 ] [ 'token' ] = access_token
+    else :
+      access_token = create_access_token ( identity = responseAux [ 'username' ] )
+      refresh_token = create_refresh_token ( identity = responseAux [ 'username' ] )
+      responseAux [ 'token' ] = access_token
     response.data = json.dumps ( responseAux )
-    Debug.log ( 'CREO EL TOKEN' )
     set_access_cookies ( response, access_token )
     set_refresh_cookies ( response, refresh_token )
-    Debug.log ( 'CREO LAS COOKIES' )
     return tuple ( [ response, access_token ] )
 
   # Callback function to check if a JWT exists in the database blocklist

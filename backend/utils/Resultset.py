@@ -1,5 +1,6 @@
 # Python Libraries / Librerías Python
 from flask_sqlalchemy.model import Model
+from typing import Any
 
 
 # Application Libraries / Librerías de la Aplicación
@@ -12,7 +13,7 @@ from kernel import (
 # Preconditions / Precondiciones
 
 
-class Result () :
+class Resultset () :
   
   # @staticmethod
   # def dictToJson ( resultSet ) :
@@ -23,7 +24,7 @@ class Result () :
   #   return myJsonList
 
   @staticmethod
-  def toJson ( resultSet ) -> list :
+  def toJson ( resultSet : Any ) -> list :
 
     myJsonList = list ()
     if isinstance ( resultSet, list ) :

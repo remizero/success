@@ -16,43 +16,58 @@ from kernel.Endpoint import (
   Permissions,
   request,
   Response,
-  Result,
+  Resultset,
   Session,
   SchemaError,
   Structs,
   ValidationError
 )
-from app.models import User
+from app.models import (
+  User,
+  UserGroup,
+  Group
+)
 
 
 # Preconditions / Precondiciones
-input = Input ( only = ( 'username', 'password' ) )
-output = Output ()
 
 
 class Endpoint ( SuccessEndpoint ) :
+
+  def __init__ ( self ) -> None :
+    self.input = Input ( only = ( 'username', 'password' ) )
+    self.model = User ()
+    self.output = Output ( True )
+    super ().__init__ ()
+
+  def get ( self ) -> Response :
+
+    if ( Session.exist ( 'loggedin' ) ) :
+
+      self.status = HTTPStatus.ACCEPTED
+      self.response = Http.response ( self.output.output (), self.status )
+
+    else :
+      self.status = HTTPStatus.CONTINUE
+      self.output.exception ( 'Ya existe una sesión.', 'WARNING', self.status )
+      self.response = Http.response ( self.output.output (), self.status )
+
+    return self.response
 
   def post ( self ) -> Response :
 
     try :
 
       Http.requestIsJson ()
-      inputData = input.load ( request.get_json () )
-      user = User ()
-      inputData [ 'password' ] = Encryption.password ( inputData [ 'password' ] )
-      userObj = user.findByFilters ( False, **inputData )
-      result = Result.toJson ( userObj )
-      self.data = output.data ( result [ 0 ] )
+      self.inputData [ 'password' ] = Encryption.password ( self.inputData [ 'password' ] )
+      modelObj = self.model.findByFilters ( False, **self.inputData )
+      result = Resultset.toJson ( modelObj )
+      profile = modelObj.profiles.filter_by ().all ()
+      result [ 0 ] [ 'fullname' ] = profile [ 0 ].name_first + ' ' + profile [ 0 ].lastname_first
       self.status = HTTPStatus.ACCEPTED
-      '''
-        HASTA AQUI TODO BIEN
-        1-. AJUSTAR EL OUTPUT AL FORMATO SUCCESS PARA RETORNAR DE CONSULTA SOLICITADA
-        2-. AJUSTAR EL OUTPUT AL FORMATO STANDARD PARA RETORNAR DE CONSULTA SOLICITADA
-        3-. CARGAR LA DATA RESPECTIVA A LA SESSION
-        4-. CREAR EL JWT
-        5-. Manejo de permisos
-        6-. Agregar el nombre del usuario en el output
-      '''
+      result [ 0 ] [ 'status' ] = self.status
+      result [ 0 ] [ 'type' ] = 'ACCEPTED'
+      self.output.data ( result [ 0 ] )
 
     except ( 
       JsonRequestException,
@@ -62,17 +77,25 @@ class Endpoint ( SuccessEndpoint ) :
     ) as exception :
 
       self.logger.log ( exception )
-      self.data = output.exception ( self.logger.toShow (), 'CRITICAL', HTTPStatus.BAD_REQUEST )
+      self.output.exception ( self.logger.toShow (), 'CRITICAL', self.status )
 
     except :
 
       self.logger.uncatchErrorException ()
-      self.data = output.exception ( self.logger.toShow (), 'CRITICAL', HTTPStatus.BAD_REQUEST )
+      self.output.exception ( self.logger.toShow (), 'FATAL', self.status )
 
     finally :
 
-      self.response = Http.response ( self.data, self.status )
+      self.response = Http.response ( self.output.output (), self.status )
       if self.status == HTTPStatus.ACCEPTED :
-        ( self.response, token ) = jwt.create ( self.response )
-        Session.create ( userObj, token )
+        try :
+          Session.create ( modelObj )
+          ( self.response, token ) = jwt.create ( self.response )
+          Session.set ( 'token', token )
+        except :
+          self.logger.uncatchErrorException ()
+          self.output.exception ( self.logger.toShow (), 'FATAL', self.status )
+          self.status = HTTPStatus.BAD_REQUEST
+          self.response = Http.response ( self.output.output (), self.status )
+
     return self.response

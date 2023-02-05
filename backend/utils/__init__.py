@@ -10,7 +10,7 @@ from .Encryption import Encryption
 from .Http import Http
 from .Strings import Strings
 from .File import File
-from .Result import Result
+from .Resultset import Resultset
 from .Structs import Structs
 from .Schemas import Schemas
 

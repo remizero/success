@@ -16,9 +16,9 @@ relator = Relations ( 'UserGroup' )
 class UserGroup ( Model ) :
 
   # Model Specific Attributes / Atributos específicos del modelo
-  user_id = Fields.db_foreign_key ( 'User' )
-  group_id = Fields.db_foreign_key ( 'Group' )
+  user_id = Fields.foreignKey ( 'User', primaryKey = True )
+  group_id = Fields.foreignKey ( 'Group', primaryKey = True )
 
   # Related tables / Tablas relacionadas
-  user = relator.relationalTable ( 'User' )
   group = relator.relationalTable ( 'Group' )
+  user = relator.relationalTable ( 'User' )

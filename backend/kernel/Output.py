@@ -3,179 +3,98 @@ from abc import (
   ABC,
   abstractmethod
 )
-from enum import (
-  Enum,
-  unique
-)
 
 
 # Application Libraries / Librerías de la Aplicación
 from exceptions import OutputException
 from kernel import (
-  Logger
+  Logger,
+  Debug
 )
 from . import Schema
+from utils import (
+  EnvVar,
+  Http,
+  Structs
+)
 
 
 # Preconditions / Precondiciones
-@unique
-class OutputType ( Enum ) :
-  ERROR = 1
-  EXCEPTION = 2
-  LOGIN = 3
-  STANDARD = 4
-  SUCCESSFUL = 5
-  SUCCESS = 6
 
-# TODO reconstruir esta clase
+
 class Output ( ABC ) :
 
-  __output       : dict       = None
-  __outputType   : OutputType = None
-  __schemaOutput : Schema     = None
-
-  schema = dict ()
-  
-  __emptySchema = {
-    'action' : '',
-    'data' : [],
-    'formModel' : []
-  }
-
-  __fullSchema = {
-    'action' : '',
-    'data' : [],
-    'model' : [
-      {
-        'name' : 'id',
-        'label' : 'ID',
-        'action' : '',
-        'htmlType' : 'input',
-        'maxLength' : '0',
-        'required' : 'False',
-        'type' : 'number'
-      },
-      {
-        'name' : 'enabled',
-        'label' : 'Habilitado',
-        'action' : '',
-        'htmlType' : 'select',
-        'maxLength' : 'None',
-        'required' : 'False',
-        'type' : 'boolean',
-        'options' : [
-          {
-            "True": "True"
-          },
-          {
-            "False": "False"
-          }
-        ]
-      },
-      {
-        'name' : 'created_at',
-        'label' : 'Creado en',
-        'action' : '',
-        'htmlType' : 'input',
-        'maxLength' : 'None',
-        'required' : 'True',
-        'type' : 'datetime-local'
-      },
-      {
-        'name' : 'updated_at',
-        'label' : 'Actualizado en',
-        'action' : '',
-        'htmlType' : 'input',
-        'maxLength' : 'None',
-        'required' : 'True',
-        'type' : 'datetime-local'
-      },
-      {
-        'name' : 'deleted',
-        'label' : 'Eliminado',
-        'action' : '',
-        'htmlType' : 'select',
-        'maxLength' : 'None',
-        'required' : 'False',
-        'type' : 'boolean',
-        'options' : [
-          {
-            "True": "True"
-          },
-          {
-            "False": "False"
-          }
-        ]
-      }
-    ]
-  }
+  __hasError      : bool   = None
+  __isLogin       : bool   = None
+  __logger        : Logger = None
+  __output        : dict   = None
+  __schemaOutput           = None
+  __successOutput : bool   = None
 
   @abstractmethod
-  def __init__ ( self, outputType : OutputType = OutputType.SUCCESS, emptySchema : bool = True ) -> None :
-    self.logger = Logger ( __name__ )
-    if ( outputType == OutputType.SUCCESS ) :
-      self.__schemaOutput = Schema ()
-    self.schema = ''
-    if ( emptySchema ) :
-      self.schema = self.__emptySchema.copy ()
+  def __init__ ( self, isLogin : bool = False ) -> None :
+    self.__logger = Logger ( __name__ )
+    self.__isLogin = isLogin
+    self.__successOutput = EnvVar.isTrue ( 'SUCCESS_OUTPUT_MODEL' )
+    if ( self.__successOutput ) :
+
+      self.__schemaOutput = Structs.successOutputEmptySchema ()
+
     else :
-      self.schema = self.__fullSchema.copy ()
-    #raise NotImplementedError ()
 
-  def getOutput ( self ) -> dict :
-    return self.__output
+      self.__schemaOutput = Schema ()
 
-  # passasdf = {
-  #   "username": resultData [ 0 ] [ 'username' ],
-  #   "email": resultData [ 0 ] [ 'email' ],
-  #   "name": resultData [ 0 ] [ 'name' ],
-  #   "lastname": resultData [ 0 ] [ 'lastname' ],
-  #   "group_id": resultData [ 0 ] [ 'group_id' ],
-  #   "loggedin": True
-  # }
+  def output ( self ) -> dict :
+    if ( self.__successOutput ) :
 
-  def getSchema ( self ) -> dict :
-    return self.schema
+      if ( Http.isMethod ( 'POST' ) ) :
+        self.setData ( self.__output )
+      return self.__schemaOutput
 
-  def getEmptySchema ( self ) -> dict :
-    return self.__emptySchema
+    elif ( self.__isLogin or self.__hasError ) :
 
-  def getFullSchema ( self ) -> dict :
-    return self.__fullSchema
+      return self.__output
+
+    else :
+
+      return self.__schemaOutput.dump ( self.__output )
 
   def setAction ( self, action : str ) -> None :
-    if ( ( self.__outputType is not None ) and ( self.__outputType is not OutputType.SUCCESS ) ) :
-      self.schema [ 'action' ] = action
+    if ( self.__successOutput ) :
+
+      self.__schemaOutput [ 'action' ] = action
+
     else :
       raise OutputException ()
 
   def setData ( self, data : list ) -> None :
-    if ( ( self.__outputType is not None ) and ( self.__outputType is not OutputType.SUCCESS ) ) :
-      self.schema [ 'data' ] = data
+    if ( self.__successOutput ) :
+
+      self.__schemaOutput [ 'data' ].append ( data.copy () )
+
     else :
       raise OutputException ()
 
   def setOptions ( self, attribute : str, options : list ) -> None :
-    if ( ( self.__outputType is not None ) and ( self.__outputType is not OutputType.SUCCESS ) ) :
-      for model in self.schema [ 'model' ] :
+    if ( self.__successOutput ) :
+
+      for model in self.__schemaOutput [ 'model' ] :
+
         if model [ 'name' ] == attribute :
+
           model [ 'options' ] = options
           break
+
     else :
       raise OutputException ()
 
-  def error ( self, _msg : str, _type : str, _status : int ) -> dict :
-    return {
+  def error ( self, _msg : str, _type : str, _status : int ) -> None :
+    self.__hasError = True
+    self.__output = {
       'error' : _msg,
       'type' : _type, # warning, fatal, error, normal
       'status' : _status #200, 401, ...
     }
 
-  def exception ( self, _msg : str, _type : str, _status : int ) -> dict :
-    return self.error ( _msg, _type, _status )
-
-  def standard () -> dict :
-    return ''
-
-  def success () -> dict :
-    return ''
+  def exception ( self, _msg : str, _type : str, _status : int ) -> None :
+    self.error ( _msg, _type, _status )
