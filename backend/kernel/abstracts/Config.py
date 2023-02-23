@@ -15,6 +15,7 @@ currentPath = pathAux.decode ( "utf-8" )
 load_dotenv ( os.path.join ( currentPath, '.env' ) )
 
 
+
 class Config ( object ) :
 
   def __init__ ( self ) -> None :

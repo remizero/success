@@ -11,9 +11,9 @@ from extensions                               import jwt
 from extensions                               import marshmallow
 from extensions                               import redis
 from extensions                               import session
+from kernel                                   import Application
 from kernel                                   import Blueprints
-from managers                                 import EnvVar
-from utils                                    import Application
+from utils                                    import EnvVar
 
 
 # Preconditions / Precondiciones

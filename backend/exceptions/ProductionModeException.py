@@ -2,12 +2,12 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel.abstracts import Exception
+from kernel.abstracts import ExceptionAbs
 
 # Preconditions / Precondiciones
 
 
-class ProductionModeException ( Exception ) :
+class ProductionModeException ( ExceptionAbs ) :
 
   def __init__ ( self ) :
     self.message = "Modo Produccion activado, por lo que debe deshabilitar el \

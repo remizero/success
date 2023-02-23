@@ -2,13 +2,13 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel.abstracts import Exception
+from kernel.abstracts import ExceptionAbs
 
 
 # Preconditions / Precondiciones
 
 
-class StringException ( Exception ) :
+class StringException ( ExceptionAbs ) :
 
   def __init__ ( self ) :
     self.message = "Se requiere un valor de tipo cadena"

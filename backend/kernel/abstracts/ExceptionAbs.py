@@ -16,7 +16,7 @@
 # https://www.pythonpool.com/python-traceback/
 
 
-class Exception ( Exception ) :
+class ExceptionAbs ( Exception ) :
 
   def __init__ ( self, e = None, code = None, message = None, details = None, fargs = None ) :
     self.e       = e

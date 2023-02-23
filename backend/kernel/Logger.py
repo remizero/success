@@ -67,6 +67,7 @@ else :
 _srcfile = os.path.normcase ( _srcfile )
 
 
+
 class Logger () :
 
   # Number of error log files to keep. / Cantidad de archivos log de errores a mantener.

@@ -2,9 +2,7 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import (
-  log
-)
+from app.apis.admin import log
 
 
 # Preconditions / Precondiciones
