@@ -1,16 +1,12 @@
 # Python Libraries / Librerías Python
-from flask import (
-  request,
-  session
-)
+from flask  import request
+from flask  import session
 from typing import Any
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import (
-  Debug,
-  Logger
-)
+from kernel import Debug
+from kernel import Logger
 
 
 # Preconditions / Precondiciones
@@ -40,6 +36,11 @@ class Session () :
   @staticmethod
   def exist ( key : str ) -> bool :
     return key not in session
+
+  @staticmethod
+  def isLogin () -> bool :
+    return ( Session.exist ( 'loggedin' ) and Session.get ( 'loggedin' ) is not None )
+    
 
   @staticmethod
   def get ( key : str ) -> Any :

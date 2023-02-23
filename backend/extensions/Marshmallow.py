@@ -1,21 +1,17 @@
 # Python Libraries / Librerías Python
-from flask import Flask
+from flask             import Flask
 from flask_marshmallow import Marshmallow as FlaskMarshmallow
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Extension
-from utils import EnvVar
+from kernel.abstracts           import Extension
+from kernel.abstracts.Extension import EnvVar
 
 
 # Preconditions / Precondiciones
 
 
 class Marshmallow ( Extension ) :
-
-  __corsConfigDefault = {}
-  __resources = None
-  __supports_credentials = False
 
   def __init__ ( self ) -> None :
     super ().__init__ ()

@@ -1,17 +1,13 @@
 # Python Libraries / Librerías Python
-from flask import (
-  json,
-  request,
-  Response
-)
+from flask  import json
+from flask  import request
+from flask  import Response
 from typing import Any
 
 
 # Application Libraries / Librerías de la Aplicación
-from exceptions import (
-  JsonRequestException,
-  RequestMethodException
-)
+from exceptions import JsonRequestException
+from exceptions import RequestMethodException
 
 
 # Preconditions / Precondiciones
@@ -42,19 +38,23 @@ class Http () :
   @staticmethod
   def __isMethod ( method : str ) -> bool :
     if request.method == method :
+
       return True
+
     raise RequestMethodException ( method )
 
   @staticmethod
   def requestIsJson () -> bool :
     if request.is_json :
+
       return True
+
     raise JsonRequestException ()
 
   @staticmethod
   def response ( data : Any, status : int ) -> Response :
     return Response (
       response = json.dumps ( data ),
-      status = status,
+      status   = status,
       mimetype = 'application/json'
     )

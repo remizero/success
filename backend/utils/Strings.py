@@ -10,7 +10,7 @@ from kernel import Debug
 
 class Strings () :
 
-  tab = '  '
+  tab       = '  '
   lineBreak = '\n'
 
   @staticmethod

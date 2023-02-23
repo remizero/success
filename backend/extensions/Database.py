@@ -1,12 +1,13 @@
 # Python Libraries / Librerías Python
-from flask import Flask
+from flask            import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
-from sqlalchemy.orm import relationship
+from sqlalchemy       import MetaData
+from sqlalchemy.orm   import relationship
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Extension
+from kernel.abstracts           import Extension
+from kernel.abstracts.Extension import EnvVar
 
 
 # Preconditions / Precondiciones

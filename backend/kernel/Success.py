@@ -3,21 +3,17 @@ from flask import Flask
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import Config
-from extensions import (
-  cors,
-  database,
-  email,
-  jwt,
-  marshmallow,
-  redis,
-  session
-)
-from . import Blueprints
-from utils import (
-  Application,
-  EnvVar
-)
+from kernel.patterns.creational.factoryMethod import ConfigFM
+from extensions                               import cors
+from extensions                               import database
+from extensions                               import email
+from extensions                               import jwt
+from extensions                               import marshmallow
+from extensions                               import redis
+from extensions                               import session
+from kernel                                   import Blueprints
+from managers                                 import EnvVar
+from utils                                    import Application
 
 
 # Preconditions / Precondiciones
@@ -25,7 +21,7 @@ from utils import (
   DEFINITION OF CONFIGURATION POLICIES TO WORK WITH THE SUCCESS APPLICATION /
   DEFINICION DE POLITICAS DE CONFIGURACION PARA TRABAJAR CON LA APLICACION SUCCESS
 """
-config = Config ()
+# config = Config ()
 
 
 class Success () :
@@ -39,7 +35,8 @@ class Success () :
     """
     #self.__success = App ( __name__, instance_relative_config = True )
     self.__success = Flask ( __name__, instance_relative_config = True )
-    self.__success.config.from_object ( Application.getConfigClass ( config ) )
+    # self.__success.config.from_object ( Application.getConfigClass ( config ) )
+    self.__success.config.from_object ( ConfigFM.create () )
     self.__success.config.from_pyfile ( Application.getConfigFile (), silent = True )
     if ( EnvVar.isTrue ( 'SUCCESS_EXTENSION_EMAIL' ) ) :
       email.register ( self.__success )

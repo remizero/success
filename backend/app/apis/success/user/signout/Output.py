@@ -2,11 +2,9 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel.Output import (
-  Output as SuccessOutput,
-  OutputType
-)
-from utils import Structs
+from kernel.abstracts        import Output as SuccessOutput
+from kernel.abstracts.Output import Structs
+from kernel.abstracts.Output import Http
 
 
 # Preconditions / Precondiciones

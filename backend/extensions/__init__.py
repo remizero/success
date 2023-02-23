@@ -2,14 +2,14 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from .Cors import Cors
-from .Database import Database
-from .Email import Email
-from .Jwt import Jwt
-from .Marshmallow import Marshmallow
-from .Redis import Redis
-from .Session import Session
-from utils import EnvVar
+from extensions.Cors        import Cors
+from extensions.Database    import Database
+from extensions.Email       import Email
+from extensions.Jwt         import Jwt
+from extensions.Marshmallow import Marshmallow
+from extensions.Redis       import Redis
+from extensions.Session     import Session
+from utils                  import EnvVar
 
 
 # Preconditions / Precondiciones

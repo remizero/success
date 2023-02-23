@@ -2,10 +2,12 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from .Fields import Fields
-from .Permissions import Permissions
-from .Relations import Relations
-from .Session import Session
+from managers.Fields      import Fields
+from managers.Permissions import Permissions
+from managers.Relations   import Relations
+from managers.Session     import Session
 
 
 # Preconditions / Precondiciones
+
+

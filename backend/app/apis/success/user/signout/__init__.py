@@ -1,12 +1,12 @@
 # Python Libraries / Librerías Python
-from flask import Blueprint
+from flask         import Blueprint
 from flask_restful import Api
 
 
 # Application Libraries / Librerías de la Aplicación
-from .Endpoint import Endpoint
-from .Input import Input
-from .Output import Output
+from app.apis.success.user.signout.Endpoint import Endpoint
+from app.apis.success.user.signout.Input    import Input
+from app.apis.success.user.signout.Output   import Output
 
 
 # Preconditions / Precondiciones

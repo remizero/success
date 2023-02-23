@@ -1,43 +1,35 @@
 # Python Libraries / Librerías Python
-from datetime import datetime, timedelta
-from flask import (
-  current_app,
-  Flask,
-  json,
-  Response,
-  jsonify
-)
-from flask_jwt_extended import (
-  create_access_token,
-  create_refresh_token,
-  decode_token,
-  get_jwt,
-  get_jwt_identity,
-  #get_jwt_idensaty,
-  JWTManager,
-  jwt_required,
-  set_access_cookies,
-  set_refresh_cookies,
-  unset_jwt_cookies,
-)
-from http import HTTPStatus
-from redis import StrictRedis
+from datetime           import datetime
+from datetime           import timedelta
+from flask              import current_app
+from flask              import Flask
+from flask              import json
+from flask              import Response
+from flask              import jsonify
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_refresh_token
+from flask_jwt_extended import decode_token
+from flask_jwt_extended import get_jwt
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import JWTManager
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import set_access_cookies
+from flask_jwt_extended import set_refresh_cookies
+from flask_jwt_extended import unset_jwt_cookies
+from http               import HTTPStatus
+from redis              import StrictRedis
 
 
 # Application Libraries / Librerías de la Aplicación
-from exceptions import RevokeJwtException
-from kernel import (
-  Extension,
-  Logger,
-  Debug
-)
-#from app.models import TokenBlacklist
-#from src.models.user import User
-from utils import (
-  Datetime,
-  EnvVar,
-  Http
-)
+from exceptions                 import RevokeJwtException
+from kernel.abstracts           import Extension
+from kernel.abstracts.Extension import EnvVar
+from kernel                     import Debug
+from kernel                     import Logger
+# from app.models       import TokenBlacklist
+# from app.models       import User
+from utils                      import Datetime
+from utils                      import Http
 
 
 # Preconditions / Precondiciones
@@ -58,10 +50,10 @@ class Jwt ( Extension ) :
     self.extension.init_app ( _app )
     with _app.app_context () :
       jwt_redis_blocklist = StrictRedis (
-        host = current_app.config [ 'REDIS_HOST' ],
-        port = current_app.config [ 'REDIS_PORT' ],
-        db = current_app.config [ 'REDIS_DB' ],
-        decode_responses = current_app.config [ 'REDIS_DECODE_RESPONSES' ]
+        host              = current_app.config [ 'REDIS_HOST' ],
+        port              = current_app.config [ 'REDIS_PORT' ],
+        db                = current_app.config [ 'REDIS_DB' ],
+        decode_responses  = current_app.config [ 'REDIS_DECODE_RESPONSES' ]
       )
 
   def userConfig ( self, **kwargs ) -> None :

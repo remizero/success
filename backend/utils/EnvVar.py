@@ -20,10 +20,10 @@ class EnvVar () :
   def getCorsResources () -> dict :
     resource = '{ '
     corsResources = EnvVar.toList ( 'CORS_RESOURCES_APP_RESOURCES' )
-    corsOrigins = EnvVar.toList ( 'CORS_RESOURCES_APP_ORIGINS' )
-    corsMethods = EnvVar.toList ( 'CORS_RESOURCES_APP_METHODS' )
-    corsAllowed = EnvVar.toList ( 'CORS_RESOURCES_APP_ALLOW_HEADERS' )
-    corsExposes = EnvVar.toList ( 'CORS_RESOURCES_APP_EXPOSE_HEADERS' )
+    corsOrigins   = EnvVar.toList ( 'CORS_RESOURCES_APP_ORIGINS' )
+    corsMethods   = EnvVar.toList ( 'CORS_RESOURCES_APP_METHODS' )
+    corsAllowed   = EnvVar.toList ( 'CORS_RESOURCES_APP_ALLOW_HEADERS' )
+    corsExposes   = EnvVar.toList ( 'CORS_RESOURCES_APP_EXPOSE_HEADERS' )
     for i in range ( len ( corsResources ) ) :
       resource += corsResources [ i ] + ' : { '
       resource += '\'origins\' : ' + EnvVar.listToString ( corsOrigins, i ) + ', '

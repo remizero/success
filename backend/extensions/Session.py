@@ -1,10 +1,10 @@
 # Python Libraries / Librerías Python
-from flask import Flask
+from flask         import Flask
 from flask_session import Session as FlaskSession
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Extension
+from kernel.abstracts import Extension
 
 
 # Preconditions / Precondiciones

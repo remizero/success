@@ -1,16 +1,14 @@
 # Python Libraries / Librerías Python
-from sqlalchemy import (
-  Boolean,
-  Column,
-  Date,
-  DateTime,
-  DECIMAL,
-  Float,
-  ForeignKey,
-  Integer,
-  String,
-  Text
-)
+from sqlalchemy import Boolean
+from sqlalchemy import Column
+from sqlalchemy import Date
+from sqlalchemy import DateTime
+from sqlalchemy import DECIMAL
+from sqlalchemy import Float
+from sqlalchemy import ForeignKey
+from sqlalchemy import Integer
+from sqlalchemy import String
+from sqlalchemy import Text
 
 
 # Application Libraries / Librerías de la Aplicación
@@ -27,7 +25,7 @@ class Fields () :
     return Column (
       Boolean,
       nullable = nullable,
-      default = default
+      default  = default
     )
 
   @staticmethod
@@ -36,7 +34,7 @@ class Fields () :
       return Column (
         Date,
         nullable = nullable,
-        default = default
+        default  = default
       )
     return Column (
       Date,
@@ -49,7 +47,7 @@ class Fields () :
       return Column (
         DateTime ( timezone = True ),
         nullable = nullable,
-        default = default
+        default  = default
       )
     return Column (
       DateTime ( timezone = True ),
@@ -61,7 +59,7 @@ class Fields () :
     return Column (
       DECIMAL ( size, decimal_size ),
       nullable = nullable,
-      default = default
+      default  = default
     )
 
   @staticmethod
@@ -69,7 +67,7 @@ class Fields () :
     return Column (
       Float ( size, decimal_size ),
       nullable = nullable,
-      default = default
+      default  = default
     )
 
   @staticmethod
@@ -80,9 +78,9 @@ class Fields () :
       ForeignKey (
         '{}.id'.format ( tableName )
       ),
-      nullable = nullable,
+      nullable    = nullable,
       primary_key = primaryKey,
-      comment = '{} ID'.format ( tableName )
+      comment     = '{} ID'.format ( tableName )
     )
 
   @staticmethod
@@ -90,16 +88,16 @@ class Fields () :
     return Column (
       Integer,
       nullable = nullable,
-      default = default
+      default  = default
     )
 
   @staticmethod
   def primaryKey () -> Column :
     return Column (
       Integer,
-      primary_key = True,
+      primary_key   = True,
       autoincrement = True,
-      index = True
+      index         = True
     )
 
   @staticmethod

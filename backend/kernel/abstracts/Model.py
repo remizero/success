@@ -4,24 +4,23 @@ from sqlalchemy.ext.declarative import declared_attr
 
 # Application Libraries / Librerías de la Aplicación
 from extensions import database
-from managers import (
-  Fields,
-  Relations
-)
-from utils import Datetime
+from managers   import Fields
+from managers   import Relations
+from utils      import Datetime
 
 
 # Preconditions / Precondiciones
 
 
+# TODO como realizar busquedas parametrizadas
 class Model ( database.extension.Model ) :
 
   __abstract__ = True
-  id = Fields.primaryKey ()
-  enabled = Fields.boolean ()
-  created_at = Fields.datetime ( default = Datetime.getNow () )
-  updated_at = Fields.datetime ( nullable = True, default = None )
-  deleted = Fields.boolean ()
+  id           = Fields.primaryKey ()
+  enabled      = Fields.boolean ()
+  created_at   = Fields.datetime ( default = Datetime.getNow () )
+  updated_at   = Fields.datetime ( nullable = True, default = None )
+  deleted      = Fields.boolean ()
 
   @declared_attr
   def __tablename__ ( cls ) :
@@ -45,7 +44,7 @@ class Model ( database.extension.Model ) :
 
   def delete ( self ) :
     self.updated_at = Datetime.getNow ()
-    self.deleted = False
+    self.deleted    = False
     self.__save ()
 
   def findAll ( self ) :

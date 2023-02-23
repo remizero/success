@@ -2,14 +2,14 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from .Group import Group
-from .Profile import Profile
-from .Role import Role
-from .TokenBlacklist import TokenBlacklist
-from .User import User
-from .UserGroup import UserGroup
-from .UserProfile import UserProfile
-from .UserRole import UserRole
+from app.models.Group          import Group
+from app.models.Profile        import Profile
+from app.models.Role           import Role
+from app.models.TokenBlacklist import TokenBlacklist
+from app.models.User           import User
+from app.models.UserGroup      import UserGroup
+from app.models.UserProfile    import UserProfile
+from app.models.UserRole       import UserRole
 
 
 # Preconditions / Precondiciones

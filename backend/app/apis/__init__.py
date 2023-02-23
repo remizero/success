@@ -2,10 +2,8 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import (
-  admin,
-  success
-)
+from app.apis import admin
+from app.apis import success
 
 
 # Preconditions / Precondiciones

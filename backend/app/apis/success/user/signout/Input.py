@@ -2,7 +2,7 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel.Schema import (
+from kernel.abstracts.Schema import (
   fields,
   pre_load,
   Schema,

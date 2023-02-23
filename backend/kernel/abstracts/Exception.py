@@ -19,11 +19,11 @@
 class Exception ( Exception ) :
 
   def __init__ ( self, e = None, code = None, message = None, details = None, fargs = None ) :
-    self.e = e
-    self.code = code
+    self.e       = e
+    self.code    = code
     self.message = message
     self.details = details
-    self.fargs = fargs
+    self.fargs   = fargs
 
   def getE ( self ) :
     return self.e

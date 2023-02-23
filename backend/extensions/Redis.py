@@ -1,10 +1,10 @@
 # Python Libraries / Librerías Python
-from flask import Flask
+from flask       import Flask
 from flask_redis import Redis as FlaskRedis
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Extension
+from kernel.abstracts import Extension
 
 
 # Preconditions / Precondiciones

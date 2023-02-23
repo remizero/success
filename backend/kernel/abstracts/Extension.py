@@ -1,10 +1,12 @@
 # Python Libraries / Librerías Python
-from abc import ABC, abstractmethod
+from abc   import ABC
+from abc   import abstractmethod
 from flask import Flask
 
 
 # Application Libraries / Librerías de la Aplicación
 from kernel import Logger
+from utils  import EnvVar
 
 
 # Preconditions / Precondiciones
@@ -12,7 +14,7 @@ from kernel import Logger
 
 class Extension ( ABC ) :
 
-  extension = None
+  extension       = None
   logger : Logger = None
 
   def __init__ ( self ) -> None :

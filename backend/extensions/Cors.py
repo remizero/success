@@ -1,11 +1,11 @@
 # Python Libraries / Librerías Python
-from flask import Flask
+from flask      import Flask
 from flask_cors import CORS
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import Extension
-from utils import EnvVar
+from kernel.abstracts           import Extension
+from kernel.abstracts.Extension import EnvVar
 
 
 # Preconditions / Precondiciones
@@ -13,18 +13,18 @@ from utils import EnvVar
 
 class Cors ( Extension ) :
 
-  __corsConfigDefault = {}
-  __resources = None
-  __supports_credentials = False
+  __corsConfigDefault    : dict = {}
+  __resources            : dict = None
+  __supports_credentials : bool = False
 
   def __init__ ( self ) -> None :
     super ().__init__ ()
     self.extension = CORS ()
     self.__corsConfigDefault = {
       r"*" : {
-        "origins" : [ "/*" ],
-        "methods" : [ "DELETE", "GET", "POST", "PUT" ],
-        "allow_headers" : [ "Authorization", "Content-Type", "X-Requested-With", "Accept", "Set-Cookie" ],
+        "origins"        : [ "/*" ],
+        "methods"        : [ "DELETE", "GET", "POST", "PUT" ],
+        "allow_headers"  : [ "Authorization", "Content-Type", "X-Requested-With", "Accept", "Set-Cookie" ],
         "expose_headers" : [ "Content-Type", "X-CSRFToken" ]
       }
     }
@@ -52,8 +52,8 @@ class Cors ( Extension ) :
     if ( EnvVar.get ( 'CORS_SUPPORTS_CREDENTIALS' ) != '' ) :
       self.__supports_credentials = EnvVar.isTrue ( 'CORS_SUPPORTS_CREDENTIALS' )
     self.extension.init_app (
-      app = _app,
-      resources = self.__resources,
+      app                  = _app,
+      resources            = self.__resources,
       supports_credentials = self.__supports_credentials
     )
 

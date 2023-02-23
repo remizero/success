@@ -1,40 +1,30 @@
 # Python Libraries / Librerías Python
-from logging import (
-  CRITICAL,
-  currentframe,
-  DEBUG,
-  ERROR,
-  FATAL,
-  Formatter,
-  getLogger,
-  INFO,
-  Logger as LoggerPython,
-  raiseExceptions,
-  StreamHandler,
-  WARNING,
-  LogRecord
-)
-from logging.handlers import (
-  RotatingFileHandler,
-  SMTPHandler
-)
+from logging                     import CRITICAL
+from logging                     import currentframe
+from logging                     import DEBUG
+from logging                     import ERROR
+from logging                     import FATAL
+from logging                     import Formatter
+from logging                     import getLogger
+from logging                     import INFO
+from logging                     import Logger as LoggerPython
+from logging                     import raiseExceptions
+from logging                     import StreamHandler
+from logging                     import WARNING
+from logging                     import LogRecord
+from logging.handlers            import RotatingFileHandler
+from logging.handlers            import SMTPHandler
 from pythonjsonlogger.jsonlogger import JsonFormatter
-from types import TracebackType
+from types                       import TracebackType
 import os
 import sys
 import traceback
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel import (
-  Debug,
-  Exception,
-  LoggerMailer
-)
-from utils import (
-  Application,
-  EnvVar
-)
+from kernel import Application
+from kernel import Debug
+from kernel import LoggerMailer
 
 
 # Preconditions / Precondiciones
@@ -80,19 +70,19 @@ _srcfile = os.path.normcase ( _srcfile )
 class Logger () :
 
   # Number of error log files to keep. / Cantidad de archivos log de errores a mantener.
-  __backupCount = 5
+  __backupCount  : int          = 5
   # Error log file name and path. / Nombre y ruta del archivo log de errores.
-  __fileName = EnvVar.get ( 'LOGGER_DIR' )
+  __fileName     : str          = os.environ.get ( 'LOGGER_DIR' )
   # Format of the message to save in the log file. / Formato del mensaje a guardar en el archivo log.
-  __format = f"%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s - %(threadName)s"
+  __format       : str          = f"%(asctime)s - [%(levelname)s] - %(name)s - (%(filename)s).%(funcName)s(%(lineno)d) - %(message)s - %(threadName)s"
   # Logger object instance. / Instancia del objeto logger.
-  __logger : LoggerPython = None
+  __logger       : LoggerPython = None
   # LoggerMailer instance for sending critical and fatal mail. / Instancia del LoggerMailer para envío de correo crítico y fatal.
   __loggerMailer : LoggerMailer = None
   # Maximum size of the error log file. / Tamaño máximo del archivo log de errores.
-  __maxBytes = 500000
+  __maxBytes     : int          = 500000
   # Error to display to the user at the frontend level. / Error a mostrar al usuario a nivel de frontend.
-  __toShow = ''
+  __toShow       : str          = ''
 
   def __init__ ( self, module : str, level : int = DEBUG ) -> None :
     self.__logger = getLogger ( module )
@@ -116,7 +106,7 @@ class Logger () :
   def __fileHandled ( self ) -> RotatingFileHandler :
     fileHandler = RotatingFileHandler ( self.__fileName, maxBytes = self.__maxBytes, backupCount = self.__backupCount, encoding = "utf-8" )
     formater = None
-    if ( EnvVar.get ( 'LOGGER_FORMATER' ) == 'json' ) :
+    if ( os.environ.get ( 'LOGGER_FORMATER' ) == 'json' ) :
 
       formater = JsonFormatter ()
 

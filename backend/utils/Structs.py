@@ -12,11 +12,11 @@ class Structs () :
   @staticmethod
   def session () :
     struct = {
-      'id' : '',
+      'id'       : '',
       'username' : '',
       'group_id' : '',
-      'role_id' : '',
-      'token' : ''
+      'role_id'  : '',
+      'token'    : ''
     }
     return struct.copy ()
   
@@ -25,20 +25,20 @@ class Structs () :
     struct = {
       'username' : '',
       'fullname' : '',
-      'token' : '',
+      'token'    : '',
       'loggedin' : '',
-      'type' : '',
-      'status' : ''
+      'type'     : '',
+      'status'   : ''
     }
     return struct.copy ()
   
   @staticmethod
   def signout () :
     struct = {
-      'msg' : '',
+      'msg'      : '',
       'loggedin' : '',
-      'type' : '',
-      'status' : ''
+      'type'     : '',
+      'status'   : ''
     }
     return struct.copy ()
 
@@ -46,7 +46,7 @@ class Structs () :
   def booleanOptions () :
     return [
       {
-        'True' : True
+        'True'  : True
       },
       {
         'False' : False
@@ -57,8 +57,8 @@ class Structs () :
   def successOutputEmptySchema () :
     emptySchema = {
       'action' : '',
-      'data' : list (),
-      'model' : list ()
+      'data'   : list (),
+      'model'  : list ()
     }
     return emptySchema.copy ()
 
@@ -72,28 +72,28 @@ class Structs () :
     schemaList.append ( Structs.jsonSelectBooleanSchema ( 'deleted', 'Eliminado', '', 'False', 5 ) )
     fullSchema = {
       'action' : '',
-      'data' : [],
-      'model' : [
+      'data'   : [],
+      'model'  : [
         {
-          'name' : 'id',
-          'label' : 'ID',
-          'action' : '',
-          'htmlType' : 'input',
+          'name'      : 'id',
+          'label'     : 'ID',
+          'action'    : '',
+          'htmlType'  : 'input',
           'maxLength' : '0',
-          'required' : 'False',
-          'type' : 'number'
+          'required'  : 'False',
+          'type'      : 'number'
         },
         {
-          'name' : 'enabled',
-          'label' : 'Habilitado',
-          'action' : '',
-          'htmlType' : 'select',
+          'name'      : 'enabled',
+          'label'     : 'Habilitado',
+          'action'    : '',
+          'htmlType'  : 'select',
           'maxLength' : 'None',
-          'required' : 'False',
-          'type' : 'boolean',
-          'options' : [
+          'required'  : 'False',
+          'type'      : 'boolean',
+          'options'   : [
             {
-              'True' : 'True'
+              'True'  : 'True'
             },
             {
               'False' : 'False'
@@ -101,34 +101,34 @@ class Structs () :
           ]
         },
         {
-          'name' : 'created_at',
-          'label' : 'Creado en',
-          'action' : '',
-          'htmlType' : 'input',
+          'name'      : 'created_at',
+          'label'     : 'Creado en',
+          'action'    : '',
+          'htmlType'  : 'input',
           'maxLength' : 'None',
-          'required' : 'True',
-          'type' : 'datetime-local'
+          'required'  : 'True',
+          'type'      : 'datetime-local'
         },
         {
-          'name' : 'updated_at',
-          'label' : 'Actualizado en',
-          'action' : '',
-          'htmlType' : 'input',
+          'name'      : 'updated_at',
+          'label'     : 'Actualizado en',
+          'action'    : '',
+          'htmlType'  : 'input',
           'maxLength' : 'None',
-          'required' : 'True',
-          'type' : 'datetime-local'
+          'required'  : 'True',
+          'type'      : 'datetime-local'
         },
         {
-          'name' : 'deleted',
-          'label' : 'Eliminado',
-          'action' : '',
-          'htmlType' : 'select',
+          'name'      : 'deleted',
+          'label'     : 'Eliminado',
+          'action'    : '',
+          'htmlType'  : 'select',
           'maxLength' : 'None',
-          'required' : 'False',
-          'type' : 'boolean',
-          'options' : [
+          'required'  : 'False',
+          'type'      : 'boolean',
+          'options'   : [
             {
-              'True' : 'True'
+              'True'  : 'True'
             },
             {
               'False' : 'False'
@@ -150,68 +150,68 @@ class Structs () :
   @staticmethod
   def jsonModelMsgResponse ( msg : str, type : str, status : int ) :
     return {
-      'msg' : msg,
-      'type' : type, # warning, fatal, error, normal
+      'msg'    : msg,
+      'type'   : type, # warning, fatal, error, normal
       'status' : status #200, 401, ...
     }
 
   @staticmethod
   def jsonInputSchema ( name, label, action, maxLength, required, type, order ) :
     return {
-      'name' : name,
-      'label' : label,
-      'action' : action,
-      'htmlType' : 'input',
+      'name'      : name,
+      'label'     : label,
+      'action'    : action,
+      'htmlType'  : 'input',
       'maxLength' : maxLength,
-      'required' : required,
-      'type' : type,
-      'order' : order
+      'required'  : required,
+      'type'      : type,
+      'order'     : order
     }
 
   @staticmethod
   def jsonInputRangeSchema ( name, label, action, maxLength, required, type, min, max, step, order ) :
     return {
-      'name' : name,
-      'label' : label,
-      'action' : action,
-      'htmlType' : 'input',
+      'name'      : name,
+      'label'     : label,
+      'action'    : action,
+      'htmlType'  : 'input',
       'maxLength' : maxLength,
-      'required' : required,
-      'type' : type,
-      'order' : order,
-      'min' : min,
-      'max' : max,
-      'step' : step
+      'required'  : required,
+      'type'      : type,
+      'order'     : order,
+      'min'       : min,
+      'max'       : max,
+      'step'      : step
     }
 
   @staticmethod
   def jsonSelectSchema ( name, label, action, maxLength, required, type, order ) :
     return {
-      'name' : name,
-      'label' : label,
-      'action' : action,
-      'htmlType' : 'select',
+      'name'      : name,
+      'label'     : label,
+      'action'    : action,
+      'htmlType'  : 'select',
       'maxLength' : maxLength,
-      'required' : required,
-      'type' : type,
-      'order' : order,
-      'options' : []
+      'required'  : required,
+      'type'      : type,
+      'order'     : order,
+      'options'   : []
     }
 
   @staticmethod
   def jsonSelectBooleanSchema ( name, label, action, required, order ) :
     return {
-      'name' : name,
-      'label' : label,
-      'action' : action,
-      'htmlType' : 'select',
+      'name'      : name,
+      'label'     : label,
+      'action'    : action,
+      'htmlType'  : 'select',
       'maxLength' : '',
-      'required' : required,
-      'type' : 'boolean',
-      'order' : order,
-      'options' : [
+      'required'  : required,
+      'type'      : 'boolean',
+      'order'     : order,
+      'options'   : [
         {
-          'True' : 'True'
+          'True'  : 'True'
         },
         {
           'False' : 'False'
@@ -222,12 +222,12 @@ class Structs () :
   @staticmethod
   def jsonTextareaSchema ( name, label, maxLength, required, order ) :
     return {
-      'name' : name,
-      'label' : label,
-      'action' : '',
-      'htmlType' : 'textarea',
+      'name'      : name,
+      'label'     : label,
+      'action'    : '',
+      'htmlType'  : 'textarea',
       'maxLength' : maxLength,
-      'required' : required,
-      'type' : 'text',
-      'order' : order
+      'required'  : required,
+      'type'      : 'text',
+      'order'     : order
     }

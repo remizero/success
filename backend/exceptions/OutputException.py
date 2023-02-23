@@ -2,7 +2,7 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel.Exception import Exception
+from kernel.abstracts import Exception
 
 # Preconditions / Precondiciones
 

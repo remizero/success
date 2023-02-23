@@ -12,7 +12,7 @@ class File () :
 
   @staticmethod
   def getLastNumberLine () -> int :
-    file = open ( EnvVar.get ( 'LOGGER_DIR' ), 'r' )
+    file  = open ( EnvVar.get ( 'LOGGER_DIR' ), 'r' )
     lines = file.readlines ()
     count = len ( lines )
     file.close ()

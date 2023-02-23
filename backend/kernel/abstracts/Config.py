@@ -1,15 +1,16 @@
 # Python Libraries / Librerías Python
-import os
 from dotenv import load_dotenv
+import os
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel.Debug import Debug
+from kernel import Debug
+from utils  import EnvVar
 
 
 # Preconditions / Precondiciones
-path = os.path.abspath ( os.getcwdb () )
-pathAux = path [ 0 : len ( path ) ]
+path        = os.path.abspath ( os.getcwdb () )
+pathAux     = path [ 0 : len ( path ) ]
 currentPath = pathAux.decode ( "utf-8" )
 load_dotenv ( os.path.join ( currentPath, '.env' ) )
 

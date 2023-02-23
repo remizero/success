@@ -2,10 +2,8 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import (
-  apis,
-  models
-)
+from app import apis
+from app import models
 
 
 # Preconditions / Precondiciones

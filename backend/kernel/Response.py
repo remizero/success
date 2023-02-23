@@ -1,11 +1,9 @@
 # Python Libraries / Librerías Python
-from flask import (
-  json,
-  request,
-  session,
-  Response as FlaskResponse
-)
-from http import HTTPStatus
+from flask import json
+from flask import request
+from flask import session
+from flask import Response as FlaskResponse
+from http  import HTTPStatus
 
 
 # Application Libraries / Librerías de la Aplicación
@@ -21,75 +19,75 @@ from http import HTTPStatus
 class Response ( FlaskResponse ) :
 
   baseSchema = {
-    'action' : '',
+    'action'    : '',
     'formModel' : [],
-    'data' : []
+    'data'      : []
   }
 
   baseSchemaAux = {
-    'action' : '',
+    'action'    : '',
     'formModel' : [
       {
-        'name' : 'id',
-        'label' : 'ID',
-        'action' : '',
-        'htmlType' : 'input',
+        'name'      : 'id',
+        'label'     : 'ID',
+        'action'    : '',
+        'htmlType'  : 'input',
         'maxLength' : '0',
-        'required' : 'False',
-        'type' : 'number'
+        'required'  : 'False',
+        'type'      : 'number'
       },
       {
-        'name' : 'created_at',
-        'label' : 'Creado en',
-        'action' : '',
-        'htmlType' : 'input',
+        'name'      : 'created_at',
+        'label'     : 'Creado en',
+        'action'    : '',
+        'htmlType'  : 'input',
         'maxLength' : 'None',
-        'required' : 'True',
-        'type' : 'datetime-local'
+        'required'  : 'True',
+        'type'      : 'datetime-local'
       },
       {
-        'name' : 'updated_at',
-        'label' : 'Actualizado en',
-        'action' : '',
-        'htmlType' : 'input',
+        'name'      : 'updated_at',
+        'label'     : 'Actualizado en',
+        'action'    : '',
+        'htmlType'  : 'input',
         'maxLength' : 'None',
-        'required' : 'True',
-        'type' : 'datetime-local'
+        'required'  : 'True',
+        'type'      : 'datetime-local'
       },
       {
-        'name' : 'deleted',
-        'label' : 'Eliminado',
-        'action' : '',
-        'htmlType' : 'select',
+        'name'      : 'deleted',
+        'label'     : 'Eliminado',
+        'action'    : '',
+        'htmlType'  : 'select',
         'maxLength' : 'None',
-        'required' : 'False',
-        'type' : 'boolean',
-        'options' : [
+        'required'  : 'False',
+        'type'      : 'boolean',
+        'options'   : [
           {
-            "True": "True"
+            "True"  : "True"
           },
           {
-            "False": "False"
+            "False" : "False"
           }
         ]
       }
     ],
-    'data' : []
+    'data'      : []
   }
 
   response = FlaskResponse ()
 
   def __init__ ( self ) :
     self.default_mimetype = 'application/json'
-    self.default_status = HTTPStatus.OK
-    self.charset = 'utf-8'
+    self.default_status   = HTTPStatus.OK
+    self.charset          = 'utf-8'
 
   def respuesta ( self ) :
     #self.response.
     return {
-      'data' : [],
+      'data'   : [],
       'status' : '',
-      'code' : '',
+      'code'   : '',
 
     }
 
@@ -97,6 +95,6 @@ class Response ( FlaskResponse ) :
   def response ( responseData, statusResponse ) :
     return Response (
       response = json.dumps ( responseData ),
-      status = statusResponse,
+      status   = statusResponse,
       mimetype = 'application/json'
     )

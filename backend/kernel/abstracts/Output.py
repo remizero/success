@@ -1,22 +1,16 @@
 # Python Libraries / Librerías Python
-from abc import (
-  ABC,
-  abstractmethod
-)
+from abc import ABC
+from abc import abstractmethod
 
 
 # Application Libraries / Librerías de la Aplicación
-from exceptions import OutputException
-from kernel import (
-  Logger,
-  Debug
-)
-from . import Schema
-from utils import (
-  EnvVar,
-  Http,
-  Structs
-)
+from exceptions       import OutputException
+from kernel           import Logger
+from kernel           import Debug
+from kernel.abstracts import Schema
+from utils            import EnvVar
+from utils            import Http
+from utils            import Structs
 
 
 # Preconditions / Precondiciones
@@ -28,13 +22,13 @@ class Output ( ABC ) :
   __isLogin       : bool   = None
   __logger        : Logger = None
   __output        : dict   = None
-  __schemaOutput           = None
+  __schemaOutput  : dict   = None
   __successOutput : bool   = None
 
   @abstractmethod
   def __init__ ( self, isLogin : bool = False ) -> None :
-    self.__logger = Logger ( __name__ )
-    self.__isLogin = isLogin
+    self.__logger        = Logger ( __name__ )
+    self.__isLogin       = isLogin
     self.__successOutput = EnvVar.isTrue ( 'SUCCESS_OUTPUT_MODEL' )
     if ( self.__successOutput ) :
 
@@ -49,10 +43,17 @@ class Output ( ABC ) :
     pass
 
   def output ( self ) -> dict :
+
     if ( self.__successOutput ) :
 
-      if ( Http.isMethod ( 'POST' ) ) :
+      if ( Http.isMethod ( 'POST' ) and not self.__hasError ) :
+
         self.setData ( self.__output )
+
+      else :
+
+        self.__schemaOutput = self.__output
+
       return self.__schemaOutput
 
     elif ( self.__isLogin or self.__hasError ) :

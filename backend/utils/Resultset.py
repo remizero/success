@@ -1,13 +1,10 @@
 # Python Libraries / Librerías Python
 from flask_sqlalchemy.model import Model
-from typing import Any
+from typing                 import Any
 
 
 # Application Libraries / Librerías de la Aplicación
-#from kernel import Model
-from kernel import (
-  Debug
-)
+from kernel import Debug
 
 
 # Preconditions / Precondiciones

@@ -2,7 +2,7 @@
 
 
 # Application Libraries / Librerías de la Aplicación
-from kernel.Schema import (
+from kernel.abstracts.Schema import (
   fields,
   pre_load,
   Schema,
@@ -21,4 +21,4 @@ class Input ( Schema ) :
 
   username = fields.String ( required = True )
   password = fields.String ( required = True )
-  email = fields.Email ( required = True )
+  email    = fields.Email  ( required = True )

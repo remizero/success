@@ -13,17 +13,17 @@ class Datetime () :
 
   @staticmethod
   def dateTimeIsoFormatTimeZoneNow () -> str :
-    tz = pytz.timezone ( 'America/Caracas' )
+    tz      = pytz.timezone ( 'America/Caracas' )
     dateNow = datetime.now ()
-    loc_dt = tz.localize ( dateNow ).replace ( microsecond = 0 )
+    loc_dt  = tz.localize ( dateNow ).replace ( microsecond = 0 )
     return loc_dt.isoformat ()
 
   @staticmethod
   def dateTimeIsoFormatTimeZoneNowErp () -> str :
-    tz = pytz.timezone ( 'America/Lima' )
-    dateNow = datetime.now ()
-    loc_dt = tz.localize ( dateNow )
-    dateIsoFormat = loc_dt.isoformat ()
+    tz                  = pytz.timezone ( 'America/Lima' )
+    dateNow             = datetime.now ()
+    loc_dt              = tz.localize ( dateNow )
+    dateIsoFormat       = loc_dt.isoformat ()
     dateIsoFormatReturn = dateIsoFormat [ 0 : 23 ] + dateIsoFormat [ 26 : ]
     return dateIsoFormatReturn
 
@@ -34,10 +34,10 @@ class Datetime () :
 
   @staticmethod
   def getDuration ( data_decrypt ) -> int :
-    due_date = datetime.strptime (
+    due_date  = datetime.strptime (
       data_decrypt [ 'end_date' ], "%Y-%m-%dT%H:%M:%S.%f%z"
     )
     now_local = datetime.now ( due_date.tzinfo )
-    duration = round ( ( due_date - now_local ).total_seconds () )
+    duration  = round ( ( due_date - now_local ).total_seconds () )
     return duration
     

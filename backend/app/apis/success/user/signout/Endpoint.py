@@ -1,47 +1,33 @@
 # Python Libraries / Librerías Python
-from flask import (
-  json,
-  request,
-  session
-)
-from jsonschema.exceptions import (
-  ValidationError,
-  SchemaError
-)
 
 
 # Application Libraries / Librerías de la Aplicación
-from .Input import Input
-from .Output import Output
-from kernel.Endpoint import (
-  Endpoint as SuccessEndpoint,
-  HTTPStatus,
-  Response,
-  Encryption,
-  Http,
-  Resultset,
-  Structs
-)
-from exceptions import (
-  JsonRequestException,
-  OutputException
-)
-from kernel import (
-  Debug,
-  Logger
-)
-from app.models import User
-#from utils.Structs import Structs
-# from utils import (
-#   Encryption,
-#   Http,
-#   Resultset,
-#   Structs
-# )
+from app.apis.success.user.signout import Input
+from app.apis.success.user.signout import Output
+from kernel.abstracts              import Endpoint as SuccessEndpoint
+from kernel.abstracts.Endpoint     import Debug
+from kernel.abstracts.Endpoint     import Encryption
+from kernel.abstracts.Endpoint     import Http
+from kernel.abstracts.Endpoint     import HTTPStatus
+from kernel.abstracts.Endpoint     import JsonRequestException
+from kernel.abstracts.Endpoint     import jwt
+from kernel.abstracts.Endpoint     import LoginException
+from kernel.abstracts.Endpoint     import OutputException
+from kernel.abstracts.Endpoint     import Permissions
+from kernel.abstracts.Endpoint     import request
+from kernel.abstracts.Endpoint     import Response
+from kernel.abstracts.Endpoint     import Resultset
+from kernel.abstracts.Endpoint     import Session
+from kernel.abstracts.Endpoint     import SchemaError
+from kernel.abstracts.Endpoint     import Structs
+from kernel.abstracts.Endpoint     import ValidationError
+from app.models                    import User
+from app.models                    import UserGroup
+from app.models                    import Group
 
 
 # Preconditions / Precondiciones
-input = Input ( only = ( 'username', 'password' ) )
+input  = Input ( only = ( 'username', 'password' ) )
 output = Output ()
 
 
@@ -51,14 +37,14 @@ class Endpoint ( SuccessEndpoint ) :
     
     try :
 
-      Http.requestIsJson ()
-      inputData = input.load ( request.get_json () )
-      user = User ()
+      Http.requestIsJson () # TODO donde colocar esta clase para evitar dependencia circular al agregar el lanzamiento de la excepcion correspondiente
+      inputData                = input.load ( request.get_json () )
+      user                     = User ()
       inputData [ 'password' ] = Encryption.password ( inputData [ 'password' ] )
-      userObj = user.findByFilters ( False, **inputData )
-      result = Resultset.toJson ( userObj )
-      self.responseData = output.data ( result [ 0 ] )
-      self.statusResponse = HTTPStatus.OK
+      userObj                  = user.findByFilters ( False, **inputData )
+      result                   = Resultset.toJson ( userObj )
+      self.responseData        = output.data ( result [ 0 ] )
+      self.statusResponse      = HTTPStatus.OK
       '''
         HASTA AQUI TODO BIEN
         1-. AJUSTAR EL OUTPUT A LA DATA QUE DEBE RETORNAR

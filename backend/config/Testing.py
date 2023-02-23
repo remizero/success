@@ -3,7 +3,8 @@ import os
 
 
 # Application Libraries / Librerías de la Aplicación
-from . import Default
+from config         import Default
+from config.Default import EnvVar
 
 
 # Preconditions / Precondiciones
