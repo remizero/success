@@ -1,0 +1,45 @@
+# Python Libraries / Librerías Python
+from marshmallow import fields
+from marshmallow import validates_schema
+from marshmallow import Schema as MarshmallowSchema
+
+# Success Libraries / Librerías Success
+
+# Application Libraries / Librerías de la Aplicación
+
+# Preconditions / Precondiciones
+
+
+class Schema ( MarshmallowSchema ) :
+
+  tenant          = fields.Str ( required = True, error_messages = {"required": "El nombre del tenant es obligatorio."} )
+  database_name   = fields.Str ( required = True, error_messages = {"required": "El nombre de la base de datos es obligatorio."} )
+  # collection_id   = fields.Str ( required = False )
+  collection_name = fields.Str ( required = False )
+  # limit           = fields.Str ( required = False )
+  # offset          = fields.Str ( required = False )
+
+
+  # @validates_schema
+  # def validate_conditionals ( self, data, **kwargs ) :
+  #   Action = self.context.get ( "Action" )  # lo pasás desde tu Input
+  #   method = self.context.get ( "method" )
+
+  #   errors = {}
+
+  #   if Action == "get" or Action == "delete" :
+  #     if not data.get ( "collection_name" ) :
+  #       errors [ "collection_name" ] = [ "El nombre de la colección es obligatorio." ]
+
+  #   if Action == "update" :
+  #     if not data.get ( "collection_id" ) :
+  #       errors [ "collection_id" ] = [ "El ID de la colección es obligatorio." ]
+
+  #   if Action == "create" :
+  #     if not data.get ( "collection_name" ) :
+  #       errors [ "collection_name" ] = [ "El nombre de la colección es obligatorio." ]
+
+  #   if errors :
+  #     raise ValidationError ( errors )
+
+

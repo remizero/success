@@ -1,0 +1,21 @@
+import os
+from success.cli import cli
+from success.core.SuccessNginxConfigGenerator import SuccessNginxConfigGenerator
+from success.core.SuccessEnv import SuccessEnv
+from success.utils.formatting import success_print_title, success_print_success
+
+@cli.command("generate-nginx-config")
+def generate_nginx_config():
+    """Genera los archivos de configuración NGINX a partir de las aplicaciones registradas."""
+    success_print_title("Generando archivos de configuración NGINX...")
+
+    # Ruta de salida
+    output_dir = os.path.join(SuccessSystemEnv.get_base_path(), "nginx-config")
+
+    # Instancia del generador
+    generator = SuccessNginxConfigGenerator(output_dir=output_dir, mode="split")
+
+    # Generación
+    generator.generate()
+
+    success_print_success(f"Configuraciones NGINX generadas en: {output_dir}")

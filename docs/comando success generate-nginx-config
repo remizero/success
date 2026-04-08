@@ -1,0 +1,38 @@
+import os
+from success.core.SuccessAppScan import getAllApps
+from success.core.SuccessConsole import print_success
+from success.infra.generators.nginx import SuccessNginxConfigGenerator
+
+import click
+
+@click.command("generate-nginx-config")
+@click.option("--output-dir", default="infra/generated/nginx/", help="Ruta de salida de los archivos .conf")
+@click.option("--split", is_flag=True, help="Genera un archivo por app/subdominio en vez de uno único")
+@click.option("--reload", is_flag=True, help="Recarga NGINX tras la generación usando docker exec")
+@click.option("--dry-run", is_flag=True, help="Muestra los archivos en consola pero no los guarda")
+def generate_nginx_config(output_dir, split, reload, dry_run):
+    apps = getAllApps()
+    generator = SuccessNginxConfigGenerator(apps)
+
+    if dry_run:
+        result = generator.render_all(split=split)
+        for filename, content in result.items():
+            click.echo(f"--- {filename} ---\n{content}\n")
+        return
+
+    os.makedirs(output_dir, exist_ok=True)
+    result = generator.render_all(split=split)
+    for filename, content in result.items():
+        path = os.path.join(output_dir, filename)
+        with open(path, "w") as f:
+            f.write(content)
+
+    print_success(f"Se han generado {len(result)} archivos .conf en '{output_dir}'")
+
+    if reload:
+        os.system("docker exec reverseproxy nginx -s reload")
+        print_success("NGINX recargado exitosamente")
+
+# Registro en el CLI global
+from success.cli import cli
+cli.add_command(generate_nginx_config)

@@ -1,0 +1,103 @@
+import os
+from pathlib import Path
+from success.core.SuccessAppScan import SuccessAppScan
+from success.utils.network import get_app_domain
+
+
+class SuccessNginxConfigGenerator:
+    def __init__(self, apps: list, output_dir: Path, split: bool = False):
+        self.apps = apps
+        self.output_dir = output_dir
+        self.split = split
+        self.template = self._load_template()
+
+    def _load_template(self):
+        # Plantilla NGINX básica con placeholders para ser reemplazados por app
+        return """
+server {
+    listen 5000;
+    server_name {server_name};
+
+    location / {
+        proxy_pass http://{internal_host}:{internal_port};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+"""
+
+    def generate(self):
+        os.makedirs(self.output_dir, exist_ok=True)
+        configs = []
+
+        for app in self.apps:
+            domain = get_app_domain(app)
+            config = self.template.format(
+                server_name=domain,
+                internal_host=app.host,
+                internal_port=app.port,
+            )
+            filename = f"{domain}.conf"
+            configs.append((filename, config))
+
+        if self.split:
+            for filename, config in configs:
+                with open(self.output_dir / filename, 'w') as f:
+                    f.write(config)
+        else:
+            with open(self.output_dir / "nginx.conf", 'w') as f:
+                for _, config in configs:
+                    f.write(config + "\n")
+
+
+
+
+
+
+import os
+from success.common.SuccessAppScan import SuccessAppScan
+from success.utils.strings import slugify
+
+
+class SuccessNginxConfigGenerator:
+
+    def __init__(self, output_path="nginx-config", split_files=True):
+        self.output_path = output_path
+        self.split_files = split_files
+        self.apps = SuccessAppScan.getAllApps()
+
+    def generate(self):
+        if not os.path.exists(self.output_path):
+            os.makedirs(self.output_path)
+
+        for app in self.apps:
+            config = self._render_app_config(app)
+
+            if self.split_files:
+                filename = slugify(app.get("name", "app")) + ".conf"
+                filepath = os.path.join(self.output_path, filename)
+                with open(filepath, "w") as f:
+                    f.write(config)
+            else:
+                print(config)
+
+    def _render_app_config(self, app):
+        domain = app.get("host", "example.localhost")
+        port = app.get("port", 5000)
+
+        return f"""
+server {{
+    listen 5000;
+    server_name {domain};
+
+    location / {{
+        proxy_pass http://{app['name']}:{port};
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }}
+}}
+"""

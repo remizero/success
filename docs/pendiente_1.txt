@@ -1,0 +1,28 @@
+Acceso interno (otros contenedores): ServerRedis:6379
+
+Acceso externo vía reverse proxy: host: <tu dominio del reverse proxy>
+port: 6379
+
+
+
+
+
+podman-compose build nexairedis
+
+podman-compose up -d nexairedis
+
+podman builder prune -a -f
+
+sudo nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml
+
+
+
+
+
+redis.SuccessRedis(
+  host = SuccessSystemEnv.get('REDIS_HOST', 'localhost'),
+  port = SuccessSystemEnv.get('REDIS_PORT', 6379),
+  db   = SuccessSystemEnv.get('REDIS_DB', 0),
+  password = SuccessSystemEnv.get('REDIS_PASSWORD', None),
+  decode_responses = SuccessSystemEnv.get('REDIS_DECODE_RESPONSES', True)
+)

@@ -1,0 +1,86 @@
+from flask import request, jsonify, Blueprint
+
+feeder_bp      = Blueprint('feeder', __name__)
+
+@feeder_bp.route('/upload', methods=['POST'])
+def upload_file():
+    # Archivos
+    files = request.files.getlist('files[]')
+
+    # Modo experto
+    expert_mode = request.form.get('expert_mode') == 'true'
+
+    # --- Valores por secciones ---
+    if expert_mode:
+        # Embeddings
+        embedding_model = request.form.get('embedding_model')
+        embedding_dim = request.form.get('embedding_dim', type=int)
+        embedding_normalize = request.form.get('embedding_normalize') == 'true'
+        embedding_metadata = request.form.get('embedding_metadata') == 'true'
+
+        # Chunking
+        chunk_size = request.form.get('chunk_size', type=int)
+        chunk_overlap = request.form.get('chunk_overlap', type=int)
+        language = request.form.get('language')
+        chunk_strategy = request.form.get('chunk_strategy')
+        chunk_delimiter = request.form.get('chunk_delimiter')
+
+        # Optimización
+        embedding_batch_size = request.form.get('embedding_batch_size', type=int)
+        embedding_show_progress = request.form.get('embedding_show_progress') == 'true'
+
+        # Postprocesamiento
+        remove_numeric_tables = request.form.get('remove_numeric_tables') == 'true'
+        remove_whitespace = request.form.get('remove_whitespace') == 'true'
+        remove_empty_lines = request.form.get('remove_empty_lines') == 'true'
+
+        # Metadata
+        metadata_source = request.form.get('metadata_source')
+        metadata_filename = request.form.get('metadata_filename')
+        metadata_folder = request.form.get('metadata_folder')
+        metadata_custom_key = request.form.get('metadata_custom_key')
+        metadata_custom_value = request.form.get('metadata_custom_value')
+
+        # ✳️ Podés organizar esto en un diccionario si preferís:
+        expert_config = {
+            'embedding': {
+                'model': embedding_model,
+                'dim': embedding_dim,
+                'normalize': embedding_normalize,
+                'add_metadata': embedding_metadata,
+                'batch_size': embedding_batch_size,
+                'show_progress': embedding_show_progress,
+            },
+            'chunking': {
+                'size': chunk_size,
+                'overlap': chunk_overlap,
+                'language': language,
+                'strategy': chunk_strategy,
+                'delimiter': chunk_delimiter,
+            },
+            'postprocessing': {
+                'remove_numeric_tables': remove_numeric_tables,
+                'remove_whitespace': remove_whitespace,
+                'remove_empty_lines': remove_empty_lines,
+            },
+            'metadata': {
+                'source': metadata_source,
+                'filename': metadata_filename,
+                'folder': metadata_folder,
+                'custom': {metadata_custom_key: metadata_custom_value} if metadata_custom_key else {},
+            }
+        }
+
+    else:
+        expert_config = {}
+
+    # 🔧 Acá procesás los archivos y la config
+    # save_files(files)
+    # process_with_config(files, expert_config)
+
+    return jsonify({
+        'status': 'success',
+        'files_received': len(files),
+        'expert_mode': expert_mode,
+        'config': expert_config if expert_mode else 'default'
+    })

@@ -1,0 +1,13 @@
+# Python Libraries / Librerías Python
+from flask         import Blueprint
+from flask_restful import Api
+
+# Success Libraries / Librerías Success
+
+# Application Libraries / Librerías de la Aplicación
+
+# Preconditions / Precondiciones
+# ¡IMPORTANTE! Esta ruta es sugerida por convención Success.
+# Podés modificarla libremente si querés ofuscar o proteger tu estructura.
+bp      = Blueprint ( "{{module}}_{{ 'view' if protocol == 'view' else 'restful' }}", __name__, url_prefix = "/{{protocol}}/{{service}}/{{version}}/{{module}}" )
+restful = Api ( bp )
