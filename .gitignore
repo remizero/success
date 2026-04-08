@@ -170,3 +170,6 @@ service-account*.json
 config/local.*
 config/*.local.py
 backend/config/*.local.py
+
+# Local tooling artifacts
+.codex
