@@ -127,3 +127,46 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Security: env and local config
+.env.*
+!.env.example
+!.env.template
+.flaskenv
+.flaskenv.*
+backend/.env*
+backend/.flaskenv*
+frontend/.env*
+
+# Security: keys/certs/secrets
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.asc
+*.gpg
+secrets/
+.secrets/
+
+# Security: cloud credentials
+.aws/
+.azure/
+.gcp/
+*credentials*.json
+service-account*.json
+
+# Security: backups/dumps/databases
+*.sql
+*.dump
+*.bak
+*.backup
+*.sqlite
+*.sqlite3
+*.db
+
+# Security: local overrides
+config/local.*
+config/*.local.py
+backend/config/*.local.py
