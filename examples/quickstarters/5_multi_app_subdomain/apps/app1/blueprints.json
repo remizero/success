@@ -1,0 +1,29 @@
+[
+  {
+    "id" : "hello_view",
+    "module" : {
+      "name" : "render",
+      "path" : {
+        "protocol" : "view",
+        "service"  : "simple_view",
+        "version"  : "v1",
+        "actions"  : "hello"
+      }
+    },
+    "url_prefix" : "/hello"
+  },
+  {
+    "id" : "public_rest",
+    "module" : {
+      "name" : "api",
+      "path" : {
+        "protocol"  : "restful",
+        "service"   : "simple_api",
+        "version"   : "v1",
+        "submodule" : "public",
+        "actions"   : "get"
+      }
+    },
+    "url_prefix" : "/public"
+  }
+]

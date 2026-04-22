@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Success Example | Hello World</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      line-height: 1.4;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .title {
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #444;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background: #0d6efd;
+      border: 1px solid #0d6efd;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.6rem 1rem;
+    }
+
+    button:hover {
+      background: #0b5ed7;
+    }
+
+    .status {
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.9rem;
+      resize: vertical;
+      box-sizing: border-box;
+      white-space: pre;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">{{ hello_message or 'Hello World desde Success View' }}</h1>
+    <p class="subtitle">App: {{ app or 'example' }} | Endpoint REST: <code id="rest-endpoint">{{ api_endpoint or '/public/' }}</code></p>
+
+    <div class="controls">
+      <button id="btnLoadApi" type="button">Consultar API Pública</button>
+      <span class="status" id="apiStatus">Esperando acción...</span>
+    </div>
+
+    <textarea id="apiResponse" readonly>{
+  "hint": "Pulsa el botón para consultar JSONPlaceholder vía endpoint REST de Success"
+}</textarea>
+  </div>
+
+  <script>
+    window.EXAMPLE_API_URL = "{{ api_endpoint or '/public/' }}";
+  </script>
+  <script src="{{ url_for('static', filename='js/example/hello.js') }}"></script>
+</body>
+</html>

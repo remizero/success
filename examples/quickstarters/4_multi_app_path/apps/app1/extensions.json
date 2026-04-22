@@ -1,0 +1,10 @@
+[
+  {
+    "class": "app1.v1.resources.extensions.RateLimiterExtension",
+    "enabled": true,
+    "config": {
+      "limit": "100 per minute",
+      "scope": "ip"
+    }
+  }
+]

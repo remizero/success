@@ -1,0 +1,19 @@
+[
+  {
+    "endpoint_id"  : "hello",
+    "protocol"     : "view",
+    "blueprint_id" : "hello_view",
+    "rule"         : "/",
+    "action"       : "apps/app1/services/view/simple_view/v1/render/hello",
+    "action_name"  : "hello",
+    "methods"      : [ "GET" ]
+  },
+  {
+    "endpoint_id"  : "public_get",
+    "protocol"     : "restful",
+    "blueprint_id" : "public_rest",
+    "resource"     : "apps/app1/services/restful/simple_api/v1/api/public/get",
+    "urls"         : "/",
+    "endpoint"     : "public_get"
+  }
+]
