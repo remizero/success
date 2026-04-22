@@ -173,3 +173,5 @@ backend/config/*.local.py
 
 # Local tooling artifacts
 .codex
+.qwen/
+.vscode/
